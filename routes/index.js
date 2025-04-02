@@ -17,7 +17,7 @@ router.get('/sellers/:sellerId', (req, res) => {
   const seller = sellersRepo.getSpecificSeller(sellerId);
 
   if (!seller) {
-    return res.status(404).send({
+    return res.sendStatus(404).send({
       error: "Seller not found"
     });
   }
@@ -32,9 +32,9 @@ router.put('/sellers/:sellerName/:sellerPhone', (req, res) => {
   const newSeller = sellersRepo.addSeller(sellerName, sellerPhone);
 
   if (newSeller) {
-    res.status(501).send({ message: "Seller already exists" });
+    res.sendStatus(501).send({ message: "Seller already exists" });
   }
-  res.status(201).send(newSeller);
+  res.sendStatus(201).send(newSeller);
 
 });
 
@@ -45,9 +45,9 @@ router.delete('/sellers/:sellerId', (req, res) => {
   const deleted = sellersRepo.deleteSeller(sellerId);
 
   if (!deleted) {
-    return res.status(404).send({ message: "Seller not found" });
+    return res.sendStatus(404).send({ message: "Seller not found" });
   }
-  res.status(200).send(deleted);
+  res.sendStatus(200).send(deleted);
 })
 
 export default router;
