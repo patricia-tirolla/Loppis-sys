@@ -1,0 +1,10 @@
+GET http://localhost:3001/sellers/all
+###
+
+GET http://localhost:3001/sellers/1
+###
+
+PUT http://localhost:3001/sellers/Patricia/0809978
+###
+
+DELETE http://localhost:3001/sellers/5
