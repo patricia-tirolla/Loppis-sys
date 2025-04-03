@@ -22,14 +22,15 @@ router.get('/products/:productId', (req, res) => {
 // ADD new product
 router.put('/sellers/:sellerId/products/:category/:price/', (req, res) => {
     const sellerId = req.params.sellerId;
+    
     const category = req.params.category;
     const price = req.params.price;
     const newProduct = productsRepo.addProduct(sellerId, category, price);
-
+    
     if (!newProduct) {
         return res.status(404).send({ message: "New product not added" });
     }
-    res.status(201).send(newProduct);
+    res.set('Location', `/products/${newProduct}`).sendStatus(201);
 });
 
 // DELETE product
