@@ -1,3 +1,4 @@
+# SELLERS
 GET http://localhost:3001/sellers/all
 ###
 
@@ -8,3 +9,30 @@ PUT http://localhost:3001/sellers/Patricia/0809978
 ###
 
 DELETE http://localhost:3001/sellers/5
+###
+
+POST http://localhost:3001/sellers/057463298/2
+###
+
+PATCH http://localhost:3001/sellers/Ana/2
+###
+
+# PRODUCTS
+GET http://localhost:3001/products/all
+###
+
+GET http://localhost:3001/products/2
+###
+
+PUT http://localhost:3001/products/shorts/35/1
+###
+
+DELETE http://localhost:3001/products/20
+###
+
+POST http://localhost:3001/products/2/scarf
+###
+
+PATCH http://localhost:3001/products/2/20
+###
+
