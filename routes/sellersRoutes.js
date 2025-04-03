@@ -56,6 +56,19 @@ router.get('/all', (req, res, next) => {
     }
     res.status(200).send(updatedPhone)
 
-  })
+  });
+
+  // UPDATE seller's name
+  router.patch('/:name/:sellerId', (req, res) => {
+    const newName = req.params.name;
+    const sellerId = req.params.sellerId;
+    const updatedName = sellersRepo.updateSellerName(newName, sellerId);
+
+    if (!updatedName) {
+      return res.status(404).send({ message: "Seller's name not updated" });
+    }
+    res.status(200).send(updatedName)
+
+  });
 
   export default router;

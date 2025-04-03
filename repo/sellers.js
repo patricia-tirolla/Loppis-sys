@@ -126,8 +126,42 @@ const updateSellerPhone = (newPhone, sellerId) => {
   } finally {
     db.close();
   }
-}
+};
+
+const updateSellerName = (newName, sellerId) => {
+  const db = connectToDatabase();
+
+  try {
+    const checkStatement = db.prepare(`
+      SELECT * FROM sellers
+      WHERE id = ?
+      `);
+    const existingSeller = checkStatement.get(sellerId);
+
+    if (!existingSeller) {
+      console.log(`Seller with ID ${sellerId} does not exists`);
+      return null;
+    }
+
+    const updateStatement = db.prepare(`
+      UPDATE sellers
+      SET name = ?
+      WHERE id = ?
+      `);
+
+    const result = updateStatement.run(newName, sellerId);
+    console.log(`Name from seller with ID: ${sellerId} changed to: ${newName}`);
+    return result;
+
+  } catch (err) {
+    console.error("Error changing name: ", err);
+    return null;
+
+  } finally {
+    db.close();
+  }
+};
 
 
 
-export default { getAllSellers, getSpecificSeller, addSeller, deleteSeller, updateSellerPhone }
+export default { getAllSellers, getSpecificSeller, addSeller, deleteSeller, updateSellerPhone, updateSellerName }
