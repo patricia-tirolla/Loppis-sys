@@ -51,13 +51,10 @@ const addSeller = (sellerName, sellerPhone) => {
       `);
 
     const result = insertStatement.run(sellerName, sellerPhone);
-
     return result.lastInsertRowid;
-
   } catch (err) {
     console.error("Error adding new seller: ", err);
     return null;
-
   } finally {
     db.close();
   }
@@ -74,14 +71,14 @@ const deleteSeller = (sellerId) => {
     const existingSeller = checkStatement.get(sellerId);
 
     if (!existingSeller) {
-      console.log('Seller does not exist.');
+      console.log("Seller does not exist.");
       return null;
     }
 
     const deleteStatement = db.prepare(`
       DELETE FROM sellers
       WHERE id = ?
-      `)
+      `);
 
     const result = deleteStatement.run(sellerId);
 
@@ -89,7 +86,41 @@ const deleteSeller = (sellerId) => {
     return result.changes > 0;
 
   } catch (err) {
-    console.error("Error adding new seller: ", err);
+    console.error("Error deleting new seller: ", err);
+    return null;
+
+  } finally {
+    db.close();
+  }
+};
+
+const updateSellerPhone = (newPhone, sellerId) => {
+  const db = connectToDatabase();
+
+  try {
+    const checkStatement = db.prepare(`
+      SELECT * FROM sellers
+      WHERE id = ?
+      `);
+    const existingSeller = checkStatement.get(sellerId);
+
+    if (!existingSeller) {
+      console.log(`Seller with ID ${sellerId} does not exists`);
+      return null;
+    }
+
+    const updateStatement = db.prepare(`
+      UPDATE sellers
+      SET phone = ?
+      WHERE id = ?
+      `);
+
+    const result = updateStatement.run(newPhone, sellerId);
+    console.log(`Phone from seller with ID: ${sellerId} changed to: ${newPhone}`);
+    return result;
+
+  } catch (err) {
+    console.error("Error changing phone: ", err);
     return null;
 
   } finally {
@@ -99,4 +130,4 @@ const deleteSeller = (sellerId) => {
 
 
 
-export default { getAllSellers, getSpecificSeller, addSeller, deleteSeller }
+export default { getAllSellers, getSpecificSeller, addSeller, deleteSeller, updateSellerPhone }

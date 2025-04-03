@@ -45,4 +45,17 @@ router.get('/all', (req, res, next) => {
     res.status(200).send(deleted);
   });
 
+  // UPDATE seller's phone
+  router.post('/:phone/:sellerId', (req, res) => {
+    const newPhone = req.params.phone;
+    const sellerId = req.params.sellerId;
+    const updatedPhone = sellersRepo.updateSellerPhone(newPhone, sellerId);
+
+    if (!updatedPhone) {
+      return res.status(404).send({ message: "Seller's phone not updated" });
+    }
+    res.status(200).send(updatedPhone)
+
+  })
+
   export default router;
