@@ -86,7 +86,7 @@ const deleteSeller = (sellerId) => {
     return result.changes > 0;
 
   } catch (err) {
-    console.error("Error deleting new seller: ", err);
+    console.error("Error deleting seller: ", err);
     return null;
 
   } finally {

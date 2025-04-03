@@ -40,7 +40,7 @@ PATCH http://localhost:3001/products/2/20
 GET http://localhost:3001/orders/all
 ###
 
-GET http://localhost:3001/orders/1
+GET http://localhost:3001/orders/2
 ###
 
 PUT http://localhost:3001/orders/4
@@ -48,4 +48,12 @@ PUT http://localhost:3001/orders/4
 
 # ---------------- ORDER ITEMS
 GET http://localhost:3001/orderItems/all
+###
 
+GET http://localhost:3001/orderItems/1
+###
+
+PUT http://localhost:3001/orders/2/orderItem/2
+###
+
+DELETE http://localhost:3001/orderItems/1
