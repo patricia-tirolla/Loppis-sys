@@ -27,8 +27,8 @@ router.get('/all', (req, res, next) => {
     const sellerPhone = req.params.sellerPhone;
     const newSeller = sellersRepo.addSeller(sellerName, sellerPhone);
   
-    if (newSeller) {
-      res.status(501).send({ message: "Seller already exists" });
+    if (!newSeller) {
+      return res.status(501).send({ message: "Seller not added" });
     }
     res.status(201).send(newSeller);
   
