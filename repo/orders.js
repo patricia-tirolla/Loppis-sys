@@ -56,7 +56,7 @@ const addOrder = (orderId) => {
 
         if (existingOrder) {
             console.log(`Order already exists with ID: ${orderId}.`);
-            return existingOrder.id;
+            return null;
         }
 
         const insertStatement = db.prepare(`

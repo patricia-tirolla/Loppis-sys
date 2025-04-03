@@ -34,8 +34,7 @@ const createTables = (newdb) => {
   
       newdb.exec(`
         CREATE TABLE IF NOT EXISTS orders (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          total INT NOT NULL
+          id INTEGER PRIMARY KEY AUTOINCREMENT
         );
       `);
   

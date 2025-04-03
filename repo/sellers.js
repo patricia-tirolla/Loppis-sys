@@ -42,7 +42,7 @@ const addSeller = (sellerName, sellerPhone) => {
 
     if (existingSeller) {
       console.log(`Seller already exists with ID: ${existingSeller.id}`);
-      return existingSeller.id;
+      return null;
     }
 
     const insertStatement = db.prepare(`
