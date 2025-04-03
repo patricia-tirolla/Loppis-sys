@@ -34,17 +34,18 @@ const getSpecificProduct = (productId) => {
     }
 };
 
-const addProduct = (category, price, sellerId) => {
+const addProduct = (sellerId, category, price, ) => {
     const db = connectToDatabase();
     try {
         const checkSellerStatement = db.prepare(`
             SELECT * FROM sellers
             WHERE id = ?
             `);
+
         const existingSeller = checkSellerStatement.get(sellerId);
 
         if (!existingSeller) {
-            console.log(`Seller doesn not exists with ID: ${sellerId}`);
+            console.log(`Seller with ID: ${sellerId} doesn not exist.`);
             return null;
         }
 
@@ -55,9 +56,11 @@ const addProduct = (category, price, sellerId) => {
 
         const result = insertStatement.run(category, price, sellerId);
         return result.lastInsertRowid;
+
     } catch (err) {
         console.error("Error adding new product", err);
         return null;
+        
     } finally {
         db.close();
     }

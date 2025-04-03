@@ -4,12 +4,12 @@ import productsRepo from "../repo/products.js"
 const router = express.Router();
 
 // GEL all products
-router.get('/all', (req, res) => {
+router.get('/products/all', (req, res) => {
     res.send(productsRepo.getAllProducts());
 });
 
 // GET specific product
-router.get('/:productId', (req, res) => {
+router.get('/products/:productId', (req, res) => {
     const productId = req.params.productId;
     const product = productsRepo.getSpecificProduct(productId);
 
@@ -20,11 +20,11 @@ router.get('/:productId', (req, res) => {
 });
 
 // ADD new product
-router.put('/:category/:price/:sellerId', (req, res) => {
+router.put('/sellers/:sellerId/products/:category/:price/', (req, res) => {
+    const sellerId = req.params.sellerId;
     const category = req.params.category;
     const price = req.params.price;
-    const sellerId = req.params.sellerId;
-    const newProduct = productsRepo.addProduct(category, price, sellerId);
+    const newProduct = productsRepo.addProduct(sellerId, category, price);
 
     if (!newProduct) {
         return res.status(404).send({ message: "New product not added" });
@@ -33,7 +33,7 @@ router.put('/:category/:price/:sellerId', (req, res) => {
 });
 
 // DELETE product
-router.delete('/:productId', (req, res) => {
+router.delete('/products/:productId', (req, res) => {
     const productId = req.params.productId;
     const deleted = productsRepo.deleteProduct(productId);
 
@@ -44,7 +44,7 @@ router.delete('/:productId', (req, res) => {
 });
 
 // UPDATE product's category
-router.post('/:productId/:category', (req, res) => {
+router.post('/products/:productId/:category', (req, res) => {
     const productId = req.params.productId;
     const category = req.params.category;
     const updatedCatgory = productsRepo.updateProductCategory(productId, category);
@@ -56,7 +56,7 @@ router.post('/:productId/:category', (req, res) => {
 });
 
 // UPDATE product's price
-router.patch('/:productId/:price', (req, res) => {
+router.patch('/products/:productId/:price', (req, res) => {
     const productId = req.params.productId;
     const price = req.params.price;
     const updatedPrice = productsRepo.updateProductPrice(productId, price);
