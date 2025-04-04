@@ -22,7 +22,7 @@ router.get('/:sellerId', (req, res) => {
 });
 
 // ADD new seller
-router.put('/:sellerName/:sellerPhone', (req, res) => {
+router.post('/:sellerName/:sellerPhone', (req, res) => {
   const sellerName = req.params.sellerName;
   const sellerPhone = req.params.sellerPhone;
   const newSeller = sellersRepo.addSeller(sellerName, sellerPhone);
@@ -72,7 +72,7 @@ router.patch('/:name/:sellerId', (req, res) => {
 });
 
 // ADD new product
-router.put('/:sellerId/products/:category/:price/', (req, res) => {
+router.post('/:sellerId/products/:category/:price/', (req, res) => {
     const sellerId = req.params.sellerId;
     
     const category = req.params.category;

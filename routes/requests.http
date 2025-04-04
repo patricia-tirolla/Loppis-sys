@@ -5,7 +5,7 @@ GET http://localhost:3001/sellers
 GET http://localhost:3001/sellers/1
 ###
 
-PUT http://localhost:3001/sellers/Kevin/423897423
+POST http://localhost:3001/sellers/Kevin/423897423
 ###
 
 DELETE http://localhost:3001/sellers/9
@@ -24,7 +24,7 @@ GET http://localhost:3001/products
 GET http://localhost:3001/products/14
 ###
 
-PUT http://localhost:3001/sellers/2/products/t-shirt/20
+POST http://localhost:3001/sellers/2/products/t-shirt/20
 ###
 
 DELETE http://localhost:3001/products/20
@@ -53,7 +53,7 @@ GET http://localhost:3001/orderItems
 GET http://localhost:3001/orderItems/1
 ###
 
-PUT http://localhost:3001/orders/2/orderItem/2
+POST http://localhost:3001/orders/2/orderItem/2
 ###
 
 DELETE http://localhost:3001/orderItems/1

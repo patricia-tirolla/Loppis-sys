@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 });
 
 // ADD new order item
-router.put('/:orderId/orderItem/:productId', (req, res) => {
+router.post('/:orderId/orderItem/:productId', (req, res) => {
     const orderId = req.params.orderId;
     const productId = req.params.productId;
     const orderItem = orderItemsRepo.addOrderItem(orderId, productId);
