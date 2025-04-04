@@ -7,8 +7,8 @@ import orderItemsRouter from "./orderItemsRoutes.js";
 const router = express.Router();
 
 router.use('/sellers', sellersRouter);
-router.use('/', productsRouter);
+router.use('/products', productsRouter);
 router.use('/orders', ordersRouter);
-router.use('/', orderItemsRouter);
+router.use('/orderItems', orderItemsRouter);
 
 export default router;

@@ -43,28 +43,16 @@ const getSpecificOrder = (orderId) => {
     }
 };
 
-const addOrder = (orderId) => {
+const addOrder = () => {
     const db = connectToDatabase();
 
     try {
-        const checkStatement = db.prepare(`
-            SELECT * from orders
-            WHERE id = ?
-            `);
-        
-        const existingOrder = checkStatement.get(orderId);
-
-        if (existingOrder) {
-            console.log(`Order already exists with ID: ${orderId}.`);
-            return null;
-        }
-
         const insertStatement = db.prepare(`
-            INSERT INTO orders (id)
-            VALUES (?)
+            INSERT INTO orders
+            VALUES (null)
             `);
 
-        const result = insertStatement.run(orderId);
+        const result = insertStatement.run();
         return result.lastInsertRowid;
 
     } catch (err) {

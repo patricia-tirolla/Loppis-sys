@@ -4,12 +4,12 @@ import productsRepo from "../repo/products.js"
 const router = express.Router();
 
 // GEL all products
-router.get('/products/all', (req, res) => {
+router.get('/', (req, res) => {
     res.send(productsRepo.getAllProducts());
 });
 
 // GET specific product
-router.get('/products/:productId', (req, res) => {
+router.get('/:productId', (req, res) => {
     const productId = req.params.productId;
     const product = productsRepo.getSpecificProduct(productId);
 
@@ -19,22 +19,8 @@ router.get('/products/:productId', (req, res) => {
     res.send(product);
 });
 
-// ADD new product
-router.put('/sellers/:sellerId/products/:category/:price/', (req, res) => {
-    const sellerId = req.params.sellerId;
-    
-    const category = req.params.category;
-    const price = req.params.price;
-    const newProduct = productsRepo.addProduct(sellerId, category, price);
-    
-    if (!newProduct) {
-        return res.status(404).send({ message: "New product not added" });
-    }
-    res.set('Location', `/products/${newProduct}`).sendStatus(201);
-});
-
 // DELETE product
-router.delete('/products/:productId', (req, res) => {
+router.delete('/:productId', (req, res) => {
     const productId = req.params.productId;
     const deleted = productsRepo.deleteProduct(productId);
 
@@ -45,7 +31,7 @@ router.delete('/products/:productId', (req, res) => {
 });
 
 // UPDATE product's category
-router.post('/products/:productId/:category', (req, res) => {
+router.post('/:productId/:category', (req, res) => {
     const productId = req.params.productId;
     const category = req.params.category;
     const updatedCatgory = productsRepo.updateProductCategory(productId, category);
@@ -57,7 +43,7 @@ router.post('/products/:productId/:category', (req, res) => {
 });
 
 // UPDATE product's price
-router.patch('/products/:productId/:price', (req, res) => {
+router.patch('/:productId/:price', (req, res) => {
     const productId = req.params.productId;
     const price = req.params.price;
     const updatedPrice = productsRepo.updateProductPrice(productId, price);

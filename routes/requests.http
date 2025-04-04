@@ -1,14 +1,14 @@
 # ----------------SELLERS
-GET http://localhost:3001/sellers/all
+GET http://localhost:3001/sellers
 ###
 
 GET http://localhost:3001/sellers/1
 ###
 
-PUT http://localhost:3001/sellers/Fabian/9482904
+PUT http://localhost:3001/sellers/Kevin/423897423
 ###
 
-DELETE http://localhost:3001/sellers/5
+DELETE http://localhost:3001/sellers/9
 ###
 
 POST http://localhost:3001/sellers/057463298/2
@@ -18,7 +18,7 @@ PATCH http://localhost:3001/sellers/Ana/3
 ###
 
 # ----------------PRODUCTS
-GET http://localhost:3001/products/all
+GET http://localhost:3001/products
 ###
 
 GET http://localhost:3001/products/14
@@ -37,17 +37,17 @@ PATCH http://localhost:3001/products/2/20
 ###
 
 # ---------------- ORDERS
-GET http://localhost:3001/orders/all
+GET http://localhost:3001/orders
 ###
 
 GET http://localhost:3001/orders/2
 ###
 
-PUT http://localhost:3001/orders/4
+POST http://localhost:3001/orders/
 ###
 
 # ---------------- ORDER ITEMS
-GET http://localhost:3001/orderItems/all
+GET http://localhost:3001/orderItems
 ###
 
 GET http://localhost:3001/orderItems/1
