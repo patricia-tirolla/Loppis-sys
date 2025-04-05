@@ -49,7 +49,7 @@ router.delete('/:sellerId', (req, res) => {
 // UPDATE seller
 router.patch('/:sellerId', (req, res) => {
   const sellerId = req.params.sellerId;
-  console.log("aqui")
+
   const seller = sellersRepo.getSpecificSeller(sellerId);
 
   if (!seller) {

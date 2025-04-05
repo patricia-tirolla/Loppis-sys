@@ -30,30 +30,29 @@ router.delete('/:productId', (req, res) => {
     res.status(200).send(deleted);
 });
 
-// UPDATE product's category
-router.patch('/:productId/category', (req, res) => {
+// UPDATE product
+router.patch('/:productId', (req, res) => {
     const productId = req.params.productId;
-    const { category } = req.body;
 
-    const updatedCatgory = productsRepo.updateProductCategory(productId, category);
+    const product = productsRepo.getSpecificProduct(productId);
 
-    if (!updatedCatgory) {
-        return res.status(404).send({ message: "Product's category not updated" });
+    if (!product) {
+        return res.status(404).send({ message: "Product not found" });
     }
-    res.status(200).send(updatedCatgory)
-});
 
-// UPDATE product's price
-router.patch('/:productId/price', (req, res) => {
-    const productId = req.params.productId;
-    const { price } = req.body;
+    const { category, price } = req.body;
 
-    const updatedPrice = productsRepo.updateProductPrice(productId, price);
-
-    if (!updatedPrice) {
-        return res.status(404).send({ message: "Product's price not updated" });
+    if (category) {
+        product.category = category;
     }
-    res.status(200).send(updatedPrice)
+
+    if (price) {
+        product.price = price;
+    }
+
+    const updatedProduct = productsRepo.updateProduct(product);
+
+    res.status(200).send(updatedProduct);
 });
 
 export default router;

@@ -33,7 +33,7 @@ PATCH http://localhost:3001/sellers/Ana/3
 GET http://localhost:3001/products
 ###
 
-GET http://localhost:3001/products/14
+GET http://localhost:3001/products/1
 ###
 
 POST http://localhost:3001/sellers/1/products
@@ -49,11 +49,11 @@ Content-Type: application/json
 DELETE http://localhost:3001/products/20
 ###
 
-PATCH http://localhost:3001/products/2/category
+PATCH http://localhost:3001/products/1
 Content-Type: application/json
 
 {
-    "category": "hat"
+    "price": "30"
 }
 ###
 

@@ -100,33 +100,21 @@ const deleteProduct = (productId) => {
     }
 };
 
-const updateProductCategory = (productId, newCategory) => {
+const updateProduct = ({ id, category, price}) => {
     const db = connectToDatabase();
 
     try {
-        const checkStatement = db.prepare(`
-            SELECT * FROM products
-            WHERE id = ?
-            `);
-        const existingProduct = checkStatement.get(productId);
-
-        if (!existingProduct) {
-            console.log(`Product with ID ${productId} does not exists`);
-            return null;
-        }
-
         const updateStatement = db.prepare(`
             UPDATE products
-            SET category = ?
+            SET category = ?, price = ?
             WHERE id = ?
             `);
-
-        const result = updateStatement.run(newCategory, productId);
-        console.log(`Category from product with ID: ${productId} changed to: ${newCategory}.`);
+        
+        const result = updateStatement.run(category, price, id);
         return result;
 
     } catch (err) {
-        console.error("Error updating category: ", err);
+        console.error("Error updating product", err);
         return null;
 
     } finally {
@@ -134,38 +122,4 @@ const updateProductCategory = (productId, newCategory) => {
     }
 };
 
-const updateProductPrice = (productId, newPrice) => {
-    const db = connectToDatabase();
-
-    try {
-        const checkStatement = db.prepare(`
-            SELECT * FROM products
-            WHERE id = ?
-            `);
-        const existingProduct = checkStatement.get(productId);
-
-        if (!existingProduct) {
-            console.log(`Product with ID ${productId} does not exists`);
-            return null;
-        }
-
-        const updateStatement = db.prepare(`
-            UPDATE products
-            SET price = ?
-            WHERE id = ?
-            `);
-
-        const result = updateStatement.run(newPrice, productId);
-        console.log(`Price from product with ID: ${productId} changed to: ${newPrice}.`);
-        return result;
-
-    } catch (err) {
-        console.error("Error updating price: ", err);
-        return null;
-
-    } finally {
-        db.close();
-    }
-};
-
-export default { getAllProducts, getSpecificProduct, addProduct, deleteProduct, updateProductCategory, updateProductPrice }
+export default { getAllProducts, getSpecificProduct, addProduct, deleteProduct, updateProduct }
