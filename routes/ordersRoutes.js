@@ -22,8 +22,7 @@ router.get('/:orderId', (req, res) => {
 
 // ADD new order
 router.post('/', (req, res) => {
-    const orderId = req.params.orderId;
-    const newOrder = ordersRepo.addOrder(orderId);
+    const newOrder = ordersRepo.addOrder();
 
     if (!newOrder) {
         return res.status(404).send({ message: "Order not added" });

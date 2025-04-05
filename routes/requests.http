@@ -5,7 +5,13 @@ GET http://localhost:3001/sellers
 GET http://localhost:3001/sellers/1
 ###
 
-POST http://localhost:3001/sellers/Kevin/423897423
+POST http://localhost:3001/sellers
+Content-Type: application/json
+
+{
+    "sellerName": "Lucas",
+    "sellerPhone": "0432974"
+}
 ###
 
 DELETE http://localhost:3001/sellers/9
@@ -24,7 +30,14 @@ GET http://localhost:3001/products
 GET http://localhost:3001/products/14
 ###
 
-POST http://localhost:3001/sellers/2/products/t-shirt/20
+POST http://localhost:3001/sellers/1/products
+Content-Type: application/json
+
+{
+    "category": "hat",
+    "price": 22
+}
+
 ###
 
 DELETE http://localhost:3001/products/20

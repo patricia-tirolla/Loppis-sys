@@ -34,8 +34,9 @@ const getSpecificProduct = (productId) => {
     }
 };
 
-const addProduct = (sellerId, category, price, ) => {
+const addProduct = (category, price, sellerId) => {
     const db = connectToDatabase();
+    
     try {
         const checkSellerStatement = db.prepare(`
             SELECT * FROM sellers

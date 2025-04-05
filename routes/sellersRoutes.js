@@ -1,5 +1,6 @@
 import express from "express";
 import sellersRepo from "../repo/sellers.js";
+import productsRepo from "../repo/products.js";
 
 const router = express.Router();
 
@@ -22,15 +23,14 @@ router.get('/:sellerId', (req, res) => {
 });
 
 // ADD new seller
-router.post('/:sellerName/:sellerPhone', (req, res) => {
-  const sellerName = req.params.sellerName;
-  const sellerPhone = req.params.sellerPhone;
+router.post('/', (req, res) => {
+  const { sellerName, sellerPhone } = req.body;
   const newSeller = sellersRepo.addSeller(sellerName, sellerPhone);
 
   if (!newSeller) {
     return res.status(501).send({ message: "Seller not added" });
   }
-  res.set('Location', `/sellers/${newSeller}`).sendStatus(201);
+  res.set('Location', `/sellers/${newSeller}`).status(201).send({ id: newSeller });
 
 });
 
@@ -46,7 +46,7 @@ router.delete('/:sellerId', (req, res) => {
 });
 
 // UPDATE seller's phone
-router.post('/:phone/:sellerId', (req, res) => {
+router.put('/:phone/:sellerId', (req, res) => {
   const newPhone = req.params.phone;
   const sellerId = req.params.sellerId;
   const updatedPhone = sellersRepo.updateSellerPhone(newPhone, sellerId);
@@ -72,17 +72,17 @@ router.patch('/:name/:sellerId', (req, res) => {
 });
 
 // ADD new product
-router.post('/:sellerId/products/:category/:price/', (req, res) => {
-    const sellerId = req.params.sellerId;
-    
-    const category = req.params.category;
-    const price = req.params.price;
-    const newProduct = productsRepo.addProduct(sellerId, category, price);
-    
-    if (!newProduct) {
-        return res.status(404).send({ message: "New product not added" });
-    }
-    res.set('Location', `/products/${newProduct}`).sendStatus(201);
+router.post('/:sellerId/products', (req, res) => {
+  const sellerId = req.params.sellerId;
+
+  const { category, price } = req.body;
+
+  const newProduct = productsRepo.addProduct(category, price, sellerId,);
+ 
+  if (!newProduct) {
+    return res.status(404).send({ message: "New product not added" });
+  }
+  res.set('Location', `/products/${newProduct}`).status(201).send({ id: newProduct });
 });
 
 export default router;
