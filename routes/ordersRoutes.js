@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 // GET specific order
 router.get('/:orderId', (req, res) => {
     const orderId = req.params.orderId;
+
     const order = ordersRepo.getSpecificOrder(orderId);
 
     if (!order) {
@@ -34,11 +35,13 @@ router.post('/', (req, res) => {
 router.post('/:orderId/orderItem/:productId', (req, res) => {
     const orderId = req.params.orderId;
     const productId = req.params.productId;
-    const orderItem = orderItemsRepo.addOrderItem(orderId, productId);
 
-    if (!orderItem) {
-        return res.status(404).send({ message: "Order item not added." });
+    const order = ordersRepo.getSpecificOrder(orderId);
+    if (!order) {
+        return res.status(404).send({ message: "Order not found." });
     }
+    
+    const orderItem = orderItemsRepo.addOrderItem(orderId, productId);
     res.location(`/orderItems/${orderItem}`).sendStatus(201);
 });
 

@@ -28,21 +28,21 @@ router.post('/', (req, res) => {
   const newSeller = sellersRepo.addSeller(sellerName, sellerPhone);
 
   if (!newSeller) {
-    return res.status(501).send({ message: "Seller not added" });
+    return res.status(501).send({ message: "Seller already exists." });
   }
   res.location(`/sellers/${newSeller}`).status(201).send({ id: newSeller });
-
 });
 
 // DELETE seller
 router.delete('/:sellerId', (req, res) => {
   const sellerId = req.params.sellerId;
 
-  const deleted = sellersRepo.deleteSeller(sellerId);
-
-  if (!deleted) {
+  const seller = sellersRepo.getSpecificSeller(sellerId);
+  if (!seller) {
     return res.status(404).send({ message: "Seller not found" });
   }
+
+  const deleted = sellersRepo.deleteSeller(sellerId);
   res.status(200).send(deleted);
 });
 
@@ -57,17 +57,14 @@ router.patch('/:sellerId', (req, res) => {
   }
 
   const { phone, name } = req.body;
-
   if (name) {
     seller.name = name;
   }
-
   if (phone) {
     seller.phone = phone;
   }
 
   const updatedSeller = sellersRepo.updateSeller(seller);
-
   res.status(200).send(updatedSeller);
 });
 
@@ -75,13 +72,16 @@ router.patch('/:sellerId', (req, res) => {
 router.post('/:sellerId/products', (req, res) => {
   const sellerId = req.params.sellerId;
 
+  const seller = sellersRepo.getSpecificSeller(sellerId);
+
+  if (!seller) {
+    return res.status(404).send({ message: "Seller not found" });
+  }
+
   const { category, price } = req.body;
 
   const newProduct = productsRepo.addProduct(category, price, sellerId,);
 
-  if (!newProduct) {
-    return res.status(404).send({ message: "New product not added" });
-  }
   res.set('Location', `/products/${newProduct}`).status(201).send({ id: newProduct });
 });
 

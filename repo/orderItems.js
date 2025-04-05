@@ -5,8 +5,8 @@ const getAllOrderItems = () => {
 
     try {
         const statement = db.prepare(`SELECT * FROM order_items`);
-        const orderItems = statement.all();
 
+        const orderItems = statement.all();
         return orderItems;
 
     } catch (err) {
@@ -28,7 +28,6 @@ const getSpecificOrderItem = (orderItemId) => {
             `);
         
         const existingOrderItem = checkStatement.get(orderItemId);
-
         if (!existingOrderItem) {
             console.log(`Order item with ID: ${orderItemId} does not exixt.`);
             return null;
@@ -48,18 +47,6 @@ const addOrderItem = (orderId, productId) => {
     const db = connectToDatabase();
 
     try {
-        const checkStatement = db.prepare(`
-            SELECT * FROM orders
-            WHERE id = ?
-            `);
-        
-        const existingOrder = checkStatement.get(orderId); 
-
-        if (!existingOrder) {
-            console.log(`Order with ID: ${orderId} does not exist.`);
-            return null;
-        }
-
         const insertStatement = db.prepare(`
             INSERT INTO order_items (product_id, order_id)
             VALUES (?, ?)
@@ -81,18 +68,6 @@ const deledeOrderItem = (orderId) => {
     const db = connectToDatabase();
 
     try {
-        const checkStatement = db.prepare(`
-            SELECT * FROM order_items
-            WHERE id = ?
-            `);
-        
-        const existingOrderItem = checkStatement.get(orderId);
-
-        if (!existingOrderItem) {
-            console.log(`Order item with ID: ${orderId} does not exist.`);
-            return null;
-        }
-
         const deleteStatement = db.prepare(`
             DELETE FROM order_items
             WHERE id = ?

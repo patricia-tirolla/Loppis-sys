@@ -2,13 +2,17 @@ import connectToDatabase from "./createDatabase.js";
 
 const getAllSellers = () => {
   const db = connectToDatabase();
+
   try {
     const statement = db.prepare(`SELECT * FROM sellers`);
+
     const sellers = statement.all();
     return sellers;
+
   } catch (err) {
     console.error("Error fetching sellers:", err);
     return [];
+
   } finally {
     db.close();
   }
@@ -37,15 +41,15 @@ const getSpecificSeller = (sellerId) => {
 
 const addSeller = (sellerName, sellerPhone) => {
   const db = connectToDatabase();
+
   try {
     const checkStatement = db.prepare(`
       SELECT id FROM sellers
       WHERE name = ? AND phone = ?
       `);
-    const existingSeller = checkStatement.get(sellerName, sellerPhone);
 
+    const existingSeller = checkStatement.get(sellerName, sellerPhone);
     if (existingSeller) {
-      console.log(`Seller already exists with ID: ${existingSeller.id}`);
       return null;
     }
 
@@ -56,9 +60,11 @@ const addSeller = (sellerName, sellerPhone) => {
 
     const result = insertStatement.run(sellerName, sellerPhone);
     return result.lastInsertRowid;
+
   } catch (err) {
     console.error("Error adding new seller: ", err);
     return null;
+
   } finally {
     db.close();
   }
@@ -68,17 +74,6 @@ const deleteSeller = (sellerId) => {
   const db = connectToDatabase();
 
   try {
-    const checkStatement = db.prepare(`
-      SELECT id FROM sellers
-      WHERE id = ?
-      `);
-    const existingSeller = checkStatement.get(sellerId);
-
-    if (!existingSeller) {
-      console.log("Seller does not exist.");
-      return null;
-    }
-
     const deleteStatement = db.prepare(`
       DELETE FROM sellers
       WHERE id = ?

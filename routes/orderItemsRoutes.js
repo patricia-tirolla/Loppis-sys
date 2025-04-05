@@ -22,11 +22,13 @@ router.get('/:orderItemId', (req, res) => {
 // DELETE order item
 router.delete('/:orderItemId', (req, res) => {
     const orderItemId = req.params.orderItemId;
-    const deletedOrderItem = orderItemsRepo.deledeOrderItem(orderItemId);
 
-    if (!deletedOrderItem) {
-        return res.status(404).send({ message: "Order item not deleted." });
+    const orderItem = orderItemsRepo.getSpecificOrderItem(orderItemId);
+    if (!orderItem) {
+        return res.status(404).send({ message: "Order item not found." });
     }
+
+    const deletedOrderItem = orderItemsRepo.deledeOrderItem(orderItemId);
     res.send(deletedOrderItem);
 });
 

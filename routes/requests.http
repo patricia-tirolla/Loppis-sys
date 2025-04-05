@@ -26,9 +26,6 @@ Content-Type: application/json
 }
 ###
 
-PATCH http://localhost:3001/sellers/Ana/3
-###
-
 # ----------------PRODUCTS
 GET http://localhost:3001/products
 ###
@@ -36,7 +33,7 @@ GET http://localhost:3001/products
 GET http://localhost:3001/products/1
 ###
 
-POST http://localhost:3001/sellers/1/products
+POST http://localhost:3001/sellers/2/products
 Content-Type: application/json
 
 {
@@ -57,14 +54,6 @@ Content-Type: application/json
 }
 ###
 
-PATCH http://localhost:3001/products/2/price
-Content-Type: application/json
-
-{
-    "price": "24"
-}
-###
-
 # ---------------- ORDERS
 GET http://localhost:3001/orders
 ###
@@ -79,10 +68,10 @@ POST http://localhost:3001/orders
 GET http://localhost:3001/orderItems
 ###
 
-GET http://localhost:3001/orderItems/1
+GET http://localhost:3001/orderItems/2
 ###
 
-POST http://localhost:3001/orders/2/orderItem/2
+POST http://localhost:3001/orders/1/orderItem/3
 ###
 
-DELETE http://localhost:3001/orderItems/1
+DELETE http://localhost:3001/orderItems/3

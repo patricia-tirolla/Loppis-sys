@@ -5,6 +5,7 @@ const getAllOrders = () => {
 
     try {
         const statement = db.prepare(`SELECT * FROM orders`);
+        
         const orders = statement.all();
         return orders;
 
