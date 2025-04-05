@@ -31,9 +31,10 @@ router.delete('/:productId', (req, res) => {
 });
 
 // UPDATE product's category
-router.post('/:productId/:category', (req, res) => {
+router.patch('/:productId/category', (req, res) => {
     const productId = req.params.productId;
-    const category = req.params.category;
+    const { category } = req.body;
+
     const updatedCatgory = productsRepo.updateProductCategory(productId, category);
 
     if (!updatedCatgory) {
@@ -43,9 +44,10 @@ router.post('/:productId/:category', (req, res) => {
 });
 
 // UPDATE product's price
-router.patch('/:productId/:price', (req, res) => {
+router.patch('/:productId/price', (req, res) => {
     const productId = req.params.productId;
-    const price = req.params.price;
+    const { price } = req.body;
+
     const updatedPrice = productsRepo.updateProductPrice(productId, price);
 
     if (!updatedPrice) {

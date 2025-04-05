@@ -30,13 +30,14 @@ router.post('/', (req, res) => {
   if (!newSeller) {
     return res.status(501).send({ message: "Seller not added" });
   }
-  res.set('Location', `/sellers/${newSeller}`).status(201).send({ id: newSeller });
+  res.location(`/sellers/${newSeller}`).status(201).send({ id: newSeller });
 
 });
 
 // DELETE seller
 router.delete('/:sellerId', (req, res) => {
   const sellerId = req.params.sellerId;
+
   const deleted = sellersRepo.deleteSeller(sellerId);
 
   if (!deleted) {
@@ -45,30 +46,29 @@ router.delete('/:sellerId', (req, res) => {
   res.status(200).send(deleted);
 });
 
-// UPDATE seller's phone
-router.put('/:phone/:sellerId', (req, res) => {
-  const newPhone = req.params.phone;
+// UPDATE seller
+router.patch('/:sellerId', (req, res) => {
   const sellerId = req.params.sellerId;
-  const updatedPhone = sellersRepo.updateSellerPhone(newPhone, sellerId);
+  console.log("aqui")
+  const seller = sellersRepo.getSpecificSeller(sellerId);
 
-  if (!updatedPhone) {
-    return res.status(404).send({ message: "Seller's phone not updated" });
+  if (!seller) {
+    return res.status(404).send({ message: "Seller not found" });
   }
-  res.status(200).send(updatedPhone)
 
-});
+  const { phone, name } = req.body;
 
-// UPDATE seller's name
-router.patch('/:name/:sellerId', (req, res) => {
-  const newName = req.params.name;
-  const sellerId = req.params.sellerId;
-  const updatedName = sellersRepo.updateSellerName(newName, sellerId);
-
-  if (!updatedName) {
-    return res.status(404).send({ message: "Seller's name not updated" });
+  if (name) {
+    seller.name = name;
   }
-  res.status(200).send(updatedName)
 
+  if (phone) {
+    seller.phone = phone;
+  }
+
+  const updatedSeller = sellersRepo.updateSeller(seller);
+
+  res.status(200).send(updatedSeller);
 });
 
 // ADD new product
@@ -78,7 +78,7 @@ router.post('/:sellerId/products', (req, res) => {
   const { category, price } = req.body;
 
   const newProduct = productsRepo.addProduct(category, price, sellerId,);
- 
+
   if (!newProduct) {
     return res.status(404).send({ message: "New product not added" });
   }

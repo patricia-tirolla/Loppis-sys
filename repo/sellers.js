@@ -16,16 +16,20 @@ const getAllSellers = () => {
 
 const getSpecificSeller = (sellerId) => {
   const db = connectToDatabase();
+
   try {
     const statement = db.prepare(`
-      SELECT sellers.name FROM sellers
+      SELECT * FROM sellers
       WHERE id = ?
       `);
+
     const seller = statement.get(sellerId);
     return seller;
+
   } catch (err) {
     console.error("Error fetching seller: ", err);
     return null;
+
   } finally {
     db.close();
   }
@@ -94,33 +98,21 @@ const deleteSeller = (sellerId) => {
   }
 };
 
-const updateSellerPhone = (newPhone, sellerId) => {
+const updateSeller = ({ id, phone, name }) => {
   const db = connectToDatabase();
 
   try {
-    const checkStatement = db.prepare(`
-      SELECT * FROM sellers
-      WHERE id = ?
-      `);
-    const existingSeller = checkStatement.get(sellerId);
-
-    if (!existingSeller) {
-      console.log(`Seller with ID ${sellerId} does not exists`);
-      return null;
-    }
-
     const updateStatement = db.prepare(`
       UPDATE sellers
-      SET phone = ?
+      SET phone = ?, name = ?
       WHERE id = ?
       `);
-
-    const result = updateStatement.run(newPhone, sellerId);
-    console.log(`Phone from seller with ID: ${sellerId} changed to: ${newPhone}`);
+    
+    const result = updateStatement.run(phone, name, id);
     return result;
 
   } catch (err) {
-    console.error("Error changing phone: ", err);
+    console.error("Error updating seller", err);
     return null;
 
   } finally {
@@ -128,40 +120,4 @@ const updateSellerPhone = (newPhone, sellerId) => {
   }
 };
 
-const updateSellerName = (newName, sellerId) => {
-  const db = connectToDatabase();
-
-  try {
-    const checkStatement = db.prepare(`
-      SELECT * FROM sellers
-      WHERE id = ?
-      `);
-    const existingSeller = checkStatement.get(sellerId);
-
-    if (!existingSeller) {
-      console.log(`Seller with ID ${sellerId} does not exists`);
-      return null;
-    }
-
-    const updateStatement = db.prepare(`
-      UPDATE sellers
-      SET name = ?
-      WHERE id = ?
-      `);
-
-    const result = updateStatement.run(newName, sellerId);
-    console.log(`Name from seller with ID: ${sellerId} changed to: ${newName}`);
-    return result;
-
-  } catch (err) {
-    console.error("Error changing name: ", err);
-    return null;
-
-  } finally {
-    db.close();
-  }
-};
-
-
-
-export default { getAllSellers, getSpecificSeller, addSeller, deleteSeller, updateSellerPhone, updateSellerName }
+export default { getAllSellers, getSpecificSeller, addSeller, deleteSeller, updateSeller }
