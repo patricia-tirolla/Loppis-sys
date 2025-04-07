@@ -9,8 +9,8 @@ POST http://localhost:3001/sellers
 Content-Type: application/json
 
 {
-    "sellerName": "Lucas",
-    "sellerPhone": "0432974"
+    "sellerName": "Dona Delma",
+    "sellerPhone": 984032354
 }
 ###
 
@@ -21,8 +21,7 @@ PATCH http://localhost:3001/sellers/1
 Content-Type: application/json
 
 {
-    "name": "Lana",
-    "phone": "584"
+    "phone": 58448230
 }
 ###
 
@@ -38,7 +37,7 @@ Content-Type: application/json
 
 {
     "category": "hat",
-    "price": "22"
+    "price": 22
 }
 
 ###
@@ -50,7 +49,7 @@ PATCH http://localhost:3001/products/1
 Content-Type: application/json
 
 {
-    "price": "30"
+    "price": 30
 }
 ###
 
