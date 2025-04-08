@@ -14,9 +14,9 @@ const NewSellerForm = ({ addNewSeller, setSeller, seller }) => {
                 <input
                     type="tel"
                     name="phone"
-                    pattern="[0-9]{3} [0-9]{7}"
+                    pattern="[0-9]{10}"
                     value={seller.sellerPhone}
-                    onChange={(e) => setSeller({ ...seller, sellerPhone: e.target.value })}
+                    onChange={(e) => setSeller({ ...seller, sellerPhone: Number(e.target.value) })}
                 />
             </label>
             <button>Add</button>
