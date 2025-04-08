@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import Popup from "reactjs-popup";
-import SellerForm from './SellerForm';
 import sellersApi from '../../API/sellers';
+import SellerActionPopup from './SellerActionPopup';
 
 const Sellers = () => {
     const [sellers, setSellers] = useState([]);
@@ -15,55 +14,31 @@ const Sellers = () => {
     return (
         <>
             <h2>These are the sellers</h2>
-            <Popup trigger={
-                <button >Register Seller</button>
-            } modal nested>
-                {close => (
-                    <SellerForm 
-                    seller={seller} 
-                    setSeller={setSeller} 
+            <SellerActionPopup 
+                mode="add"
+                triggerText="Add Seller"
+                seller={seller}
+                setSeller={setSeller}
+                onSubmit={() => sellersApi.addSeller(seller, setSellers)}
+            />
 
-                    addNewSeller={(e) => {
-                        e.preventDefault();
-                        sellersApi.addSeller(seller, setSellers)
-                        setSeller({ sellerName: '', sellerPhone: '' });
-                        close();
-                    }} />
-                )}
-            </Popup>
-            <Popup trigger={
-                <button >Update Seller</button>
-            } modal nested>
-                {close => (
-                    <SellerForm
-                        seller={seller} 
-                        setSeller={setSeller}
-                        sellerId={sellerId} 
-                        setSellerId={setSellerId}
+            <SellerActionPopup
+                mode="update"
+                triggerText="Update Seller"
+                seller={seller}
+                setSeller={setSeller}
+                sellerId={sellerId}
+                setSellerId={setSellerId}
+                onSubmit={() => sellersApi.updateSeller(seller, sellerId, setSellers)}
+            />
 
-                        updateSeller={(e) => {
-                            e.preventDefault();
-                            sellersApi.updateSeller(seller, sellerId, setSellers);
-                            setSeller({ sellerName: '', sellerPhone: '' });
-                            setSellerId({id: ''});
-                            close();
-                        }} />
-                )}
-            </Popup>
-            <Popup trigger={
-                <button >Delete Seller</button>
-            } modal nested>
-                {close => (
-                    <SellerForm
-                        sellerId={sellerId} 
-                        
-                        deleteSeller={(e) => {
-                            e.preventDefault();
-                            sellersApi.deleteSeller(sellerId, setSellers);
-                            close();
-                        }} />
-                )}
-            </Popup>
+            <SellerActionPopup
+                mode="delete"
+                triggerText="Delete Seller"
+                sellerId={sellerId}
+                setSellerId={setSellerId}
+                onSubmit={() => sellersApi.deleteSeller(sellerId, setSellers)}
+            />
             <ul>
                 {sellers.map((seller) => (
                     <li key={seller.id}>
