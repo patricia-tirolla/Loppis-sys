@@ -27,27 +27,27 @@ const getSpecificSeller = async (sellerId) => {
 };
 
 const addSeller = async ({ sellerName, sellerPhone }, setSellers) => {
-        try {
-            const response = await fetch('http://localhost:3001/sellers', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ sellerName, sellerPhone })
-            });
-            if (response.ok) {
-                const json = await response.json();
-                setSellers((sellers) => [...sellers, { id: json.id, name: sellerName, phone: sellerPhone }]);
-            } else {
-                const err = await response.json();
-                console.error("failed to add seller: ", err.message);
-            }
-        } catch (err) {
-            console.error("Couldn't add seller: ", err);
+    try {
+        const response = await fetch('http://localhost:3001/sellers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ sellerName, sellerPhone })
+        });
+        if (response.ok) {
+            const json = await response.json();
+            setSellers((sellers) => [...sellers, { id: json.id, name: sellerName, phone: sellerPhone }]);
+        } else {
+            const err = await response.json();
+            console.error("failed to add seller: ", err.message);
         }
+    } catch (err) {
+        console.error("Couldn't add seller: ", err);
+    }
 };
 
-const updateSeller = async ({ sellerName, sellerPhone}, sellerId, setSellers) => {
+const updateSeller = async ({ sellerName, sellerPhone }, sellerId, setSellers) => {
     try {
         const response = await fetch(`http://localhost:3001/sellers/${sellerId}`, {
             method: 'PATCH',
@@ -91,6 +91,24 @@ const deleteSeller = async (sellerId, setSellers) => {
     }
 };
 
-const sellersApi = { getAllSellers, addSeller, updateSeller, deleteSeller, getSpecificSeller }
+const addNewProduct = async ({ category, price }, sellerId) => {
+    try {
+        const response = await fetch(`http://localhost:3001/sellers/${sellerId}/products`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ category, price })
+        });
+        if (!response.ok) {
+            const err = await response.json();
+            console.error("failed to add seller: ", err.message);
+        }
+    } catch (err) {
+        console.error("Couldn't add seller: ", err);
+    }
+}
+
+const sellersApi = { getAllSellers, addSeller, updateSeller, deleteSeller, getSpecificSeller, addNewProduct }
 
 export default sellersApi 

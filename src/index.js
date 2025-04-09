@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 import Sellers from './Pages/Sellers/Sellers';
+import AddNewProduct from './Pages/Sellers/AddNewProduct';
 import Products from './Pages/Products/Products';
 import Seller from './Pages/Sellers/Seller'
 
@@ -16,6 +17,7 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/sellers" element={<Sellers />} />
         <Route path="/sellers/:sellerId" element={<Seller />} />
+        <Route path="/sellers/:sellerId/products/add" element={<AddNewProduct />}/>
         <Route path='/products' element={<Products />} />
       </Routes>
 
