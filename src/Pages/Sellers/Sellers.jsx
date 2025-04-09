@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import Seller from "./Seller"
+import { Link } from 'react-router-dom';
 import sellersApi from '../../API/sellers';
 import SellerActionPopup from './SellerActionPopup';
 

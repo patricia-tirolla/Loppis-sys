@@ -7,7 +7,8 @@ import App from './App';
 import Sellers from './Pages/Sellers/Sellers';
 import AddNewProduct from './Pages/Sellers/AddNewProduct';
 import Products from './Pages/Products/Products';
-import Seller from './Pages/Sellers/Seller'
+import Seller from './Pages/Sellers/Seller';
+import Product from './Pages/Products/Product';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,7 @@ root.render(
         <Route path="/sellers/:sellerId" element={<Seller />} />
         <Route path="/sellers/:sellerId/products/add" element={<AddNewProduct />}/>
         <Route path='/products' element={<Products />} />
+        <Route path='/products/:productId' element={<Product />}/>
       </Routes>
 
     </BrowserRouter>
