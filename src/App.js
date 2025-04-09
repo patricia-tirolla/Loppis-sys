@@ -8,6 +8,7 @@ function App() {
       <h1>This is my app</h1>
       <nav>
         <NavLink to="/sellers">Go to sellers page</NavLink>
+        <NavLink to="/products">Go to products page</NavLink>
       </nav>
     </div>
   );

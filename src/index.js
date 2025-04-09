@@ -5,16 +5,20 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 import Sellers from './Pages/Sellers/Sellers';
+import Products from './Pages/Products/Products';
+import Seller from './Pages/Sellers/Seller'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/sellers" element={<Sellers />} />
-    </Routes>
-      
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/sellers" element={<Sellers />} />
+        <Route path="/sellers/:sellerId" element={<Seller />} />
+        <Route path='/products' element={<Products />} />
+      </Routes>
+
     </BrowserRouter>
   </React.StrictMode>
 );

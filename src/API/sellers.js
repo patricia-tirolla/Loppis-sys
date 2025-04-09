@@ -12,6 +12,20 @@ const getAllSellers = async (setSellers) => {
     }
 };
 
+const getSpecificSeller = async (sellerId) => {
+    try {
+        const response = await fetch(`http://localhost:3001/sellers/${sellerId}`);
+        if (response.ok) {
+            const json = await response.json();
+            return json;
+        } else {
+            console.error("failed to fetch seller", response.status);
+        }
+    } catch (err) {
+        console.error("Couldn't fetch: ", err);
+    }
+};
+
 const addSeller = async ({ sellerName, sellerPhone }, setSellers) => {
         try {
             const response = await fetch('http://localhost:3001/sellers', {
@@ -77,7 +91,6 @@ const deleteSeller = async (sellerId, setSellers) => {
     }
 };
 
-
-const sellersApi = { getAllSellers, addSeller, updateSeller, deleteSeller }
+const sellersApi = { getAllSellers, addSeller, updateSeller, deleteSeller, getSpecificSeller }
 
 export default sellersApi 

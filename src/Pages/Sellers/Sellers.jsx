@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import Seller from "./Seller"
 import sellersApi from '../../API/sellers';
 import SellerActionPopup from './SellerActionPopup';
 
@@ -42,7 +44,9 @@ const Sellers = () => {
             <ul>
                 {sellers.map((seller) => (
                     <li key={seller.id}>
-                        {seller.name}
+                        <Link to={`/sellers/${seller.id}`}>
+                            {seller.name}
+                        </Link>
                     </li>
                 ))}
             </ul>
