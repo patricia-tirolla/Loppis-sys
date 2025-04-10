@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 import productsApi from '../../API/products';
 
 const Products = ({ inicialProducts }) => {
-    const [products, setProducts] = useState(inicialProducts || []);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         if (!inicialProducts) {
             productsApi.getAllProducts(setProducts);
-        }   
+        } else {
+            setProducts(inicialProducts);
+        }
     }, [inicialProducts])
 
     return (

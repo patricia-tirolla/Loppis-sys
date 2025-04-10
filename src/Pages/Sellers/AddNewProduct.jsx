@@ -14,7 +14,9 @@ const AddNewProduct = () => {
             <form onSubmit={
                 (e) => {
                     e.preventDefault();
-                    sellersApi.addNewProduct({ category, price }, sellerId)
+                    sellersApi.addNewProduct({ category, price }, sellerId);
+                    setCategory('');
+                    setPrice('');
                 }
             }>
                 <label>Category
