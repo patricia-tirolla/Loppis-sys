@@ -107,8 +107,22 @@ const addNewProduct = async ({ category, price }, sellerId) => {
     } catch (err) {
         console.error("Couldn't add seller: ", err);
     }
-}
+};
 
-const sellersApi = { getAllSellers, addSeller, updateSeller, deleteSeller, getSpecificSeller, addNewProduct }
+const getAllProductsFromSpecificSeller = async (sellerId) => {
+    try {
+        const response = await fetch(`http://localhost:3001/sellers/${sellerId}/products`);
+        if (response.ok) {
+            const json = await response.json();
+            return json;
+        } else {
+            console.error("failed to fetch seller", response.status);
+        }
+    } catch (err) {
+        console.error("Couldn't add seller: ", err);
+    }
+};
+
+const sellersApi = { getAllSellers, addSeller, updateSeller, deleteSeller, getSpecificSeller, addNewProduct, getAllProductsFromSpecificSeller }
 
 export default sellersApi 
