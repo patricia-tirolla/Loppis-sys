@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import ordersAPI from "../../API/orders";
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
-    const [orderId, setOrderId] = useState('');
 
     const navigate = useNavigate();
 
@@ -18,12 +17,10 @@ const Orders = () => {
 
     const addOrder = async () => {
         const createdOrderId = await ordersAPI.addOrder();
-        console.log("is it returning the id?", createdOrderId)
-        setOrderId(createdOrderId);
         if (createdOrderId) {
-            navigate(`/orders/${createdOrderId}`);
+            navigate(`/orders/${createdOrderId}/orderItems`);
         }
-        
+
     }
 
     return (
@@ -33,7 +30,9 @@ const Orders = () => {
             <ul>
                 {orders.map((order) => (
                     <li key={order.id}>
-                        {order.id}
+                        <Link to={`/orders/${order.id}/orderItems`}>
+                            {order.id}
+                        </Link>
                     </li>
                 ))}
             </ul>
