@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
     if (!newOrder) {
         return res.status(404).send({ message: "Order not added" });
     }
-    res.location(`/orders/${newOrder}`).sendStatus(200);
+    res.location(`/orders/${newOrder}`).json({ id: newOrder });
 });
 
 // ADD new order item
