@@ -5,7 +5,7 @@ const getAllOrders = () => {
 
     try {
         const statement = db.prepare(`SELECT * FROM orders`);
-        
+
         const orders = statement.all();
         return orders;
 
@@ -26,7 +26,7 @@ const getSpecificOrder = (orderId) => {
             SELECT * FROM orders
             WHERE id = ?
             `);
-        
+
         const existingOrder = checkStatement.get(orderId);
 
         if (!existingOrder) {
@@ -64,4 +64,32 @@ const addOrder = () => {
     }
 };
 
-export default { getAllOrders, getSpecificOrder, addOrder }
+const getAllOrderItemsFromSpecificOrder = (orderId) => {
+    const db = connectToDatabase();
+
+    try {
+        const statement = db.prepare(`
+            SELECT 
+            order_items.id AS order_item_id,
+            products.id AS product_id, 
+            products.category, 
+            products.price
+            FROM products
+            INNER JOIN order_items ON order_items.product_id = products.id
+            INNER JOIN orders ON orders.id = order_items.order_id
+            WHERE orders.id = ?
+            `);
+
+        const result = statement.all(orderId);
+        return result;
+
+    } catch (err) {
+        console.error("Error getting products: ", err);
+        return null;
+    
+      } finally {
+        db.close();
+      }
+};
+
+export default { getAllOrders, getSpecificOrder, addOrder, getAllOrderItemsFromSpecificOrder }

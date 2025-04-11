@@ -1,6 +1,7 @@
 import express from "express";
 import ordersRepo from "../repo/orders.js";
 import orderItemsRepo from "../repo/orderItems.js";
+import orders from "../repo/orders.js";
 
 const router = express.Router();
 
@@ -32,7 +33,7 @@ router.post('/', (req, res) => {
 });
 
 // ADD new order item
-router.post('/:orderId/orderItem/:productId', (req, res) => {
+router.post('/:orderId/orderItems/:productId', (req, res) => {
     const orderId = req.params.orderId;
     const productId = req.params.productId;
 
@@ -42,8 +43,21 @@ router.post('/:orderId/orderItem/:productId', (req, res) => {
     }
     
     const orderItem = orderItemsRepo.addOrderItem(orderId, productId);
-    res.location(`/orderItems/${orderItem}`).sendStatus(201);
+    res.location(`/orderItems/${orderItem}`).json({ id: orderItem });
 });
+
+// GET all order items from specific order
+router.get('/:orderId/orderItems', (req, res) => {
+    const orderId = req.params.orderId;
+
+    const order = ordersRepo.getSpecificOrder(orderId);
+    if(!order) {
+        return res.status(404).send({ message: "Order not found." });
+    }
+
+    const orderItems = ordersRepo.getAllOrderItemsFromSpecificOrder(orderId);
+    res.send(orderItems);
+})
 
 export default router;
 

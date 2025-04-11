@@ -67,6 +67,9 @@ GET http://localhost:3001/orders/2
 POST http://localhost:3001/orders
 ###
 
+GET http://localhost:3001/orders/2/orderItems
+###
+
 # ---------------- ORDER ITEMS
 GET http://localhost:3001/orderItems
 ###
