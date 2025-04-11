@@ -12,8 +12,8 @@ router.get('/', (req, res, next) => {
 // GET specific seller
 router.get('/:sellerId', (req, res) => {
   const sellerId = req.params.sellerId;
-  const seller = sellersRepo.getSpecificSeller(sellerId);
 
+  const seller = sellersRepo.getSpecificSeller(sellerId);
   if (!seller) {
     return res.status(404).send({
       error: "Seller not found"
@@ -25,8 +25,8 @@ router.get('/:sellerId', (req, res) => {
 // ADD new seller
 router.post('/', (req, res) => {
   const { sellerName, sellerPhone } = req.body;
-  const newSeller = sellersRepo.addSeller(sellerName, sellerPhone);
 
+  const newSeller = sellersRepo.addSeller(sellerName, sellerPhone);
   if (!newSeller) {
     return res.status(501).send({ message: "Seller already exists." });
   }
@@ -51,7 +51,6 @@ router.patch('/:sellerId', (req, res) => {
   const sellerId = req.params.sellerId;
 
   const seller = sellersRepo.getSpecificSeller(sellerId);
-
   if (!seller) {
     return res.status(404).send({ message: "Seller not found" });
   }
@@ -73,7 +72,6 @@ router.post('/:sellerId/products', (req, res) => {
   const sellerId = req.params.sellerId;
 
   const seller = sellersRepo.getSpecificSeller(sellerId);
-
   if (!seller) {
     return res.status(404).send({ message: "Seller not found" });
   }
@@ -81,8 +79,20 @@ router.post('/:sellerId/products', (req, res) => {
   const { category, price } = req.body;
 
   const newProduct = productsRepo.addProduct(category, price, sellerId,);
-
   res.set('Location', `/products/${newProduct}`).status(201).send({ id: newProduct });
 });
+
+// GET all products from specific seller
+router.get('/:sellerId/products', (req, res) => {
+  const sellerId = req.params.sellerId;
+
+  const seller = sellersRepo.getSpecificSeller(sellerId);
+  if (!seller) {
+    return res.status(404).send({ message: "Seller not found" });
+  }
+
+  const allProducts = sellersRepo.getAllProductsFromSpecificSeller(sellerId);
+  res.send(allProducts);
+})
 
 export default router;

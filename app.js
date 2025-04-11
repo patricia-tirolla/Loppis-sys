@@ -1,16 +1,16 @@
 import createError from 'http-errors';
 import express from 'express';
 import logger from 'morgan';
+import cors from 'cors';
 
 import indexRouter from './routes/index.js';
 
 const app = express();
 
-const PORT = 3001;
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 app.use('/', indexRouter);
 
@@ -28,10 +28,6 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.send(res.locals.error);
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT} 🚀`);
 });
 
 export default app;

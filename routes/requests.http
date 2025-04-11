@@ -5,6 +5,10 @@ GET http://localhost:3001/sellers
 GET http://localhost:3001/sellers/1
 ###
 
+# GET all products from specific selleer
+GET http://localhost:3001/sellers/2/products
+###
+
 POST http://localhost:3001/sellers
 Content-Type: application/json
 

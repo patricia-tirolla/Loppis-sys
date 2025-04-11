@@ -115,4 +115,27 @@ const updateSeller = ({ id, phone, name }) => {
   }
 };
 
-export default { getAllSellers, getSpecificSeller, addSeller, deleteSeller, updateSeller }
+const getAllProductsFromSpecificSeller = (sellerId) => {
+  const db = connectToDatabase();
+
+  try {
+    const statement = db.prepare(`
+      SELECT products.id, products.category, products.price, sellers.name
+      FROM products
+      INNER JOIN sellers ON sellers.id = products.seller_id
+      WHERE products.seller_id = ?
+      `);
+
+    const result = statement.all(sellerId);
+    return result;
+
+  } catch (err) {
+    console.error("Error getting products: ", err);
+    return null;
+
+  } finally {
+    db.close();
+  }
+}
+
+export default { getAllSellers, getSpecificSeller, addSeller, deleteSeller, updateSeller, getAllProductsFromSpecificSeller }
