@@ -24,6 +24,7 @@ const Products = ({ inicialProducts }) => {
                                 e.preventDefault();
                                 productsApi.updateProduct({ category: product.category, price: product.price }, product.id, setProducts)
                             }}>
+                            
                             <label>
                                 <input 
                                 type="text" 
@@ -52,6 +53,8 @@ const Products = ({ inicialProducts }) => {
                             </label>
                             <button type="submit">Update</button>
                             </form>
+                            {product.category}
+                            {product.price}
 {/*                             Fix delete button
                             <button>Delete</button> */}
                         {/* </Link> */}

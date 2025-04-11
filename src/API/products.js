@@ -42,7 +42,6 @@ const updateProduct = async ({ category, price }, productId, setProducts) => {
             const err = await response.json();
             console.error("failed to update seller: ", err.message);
         }
-        
     } catch (err) {
         console.error("Couldn't update seller: ", err);
     }

@@ -9,6 +9,8 @@ function App() {
       <nav>
         <NavLink to="/sellers">Go to sellers page</NavLink>
         <NavLink to="/products">Go to products page</NavLink>
+        <NavLink to="/orders">Go to orders page</NavLink>
+
       </nav>
     </div>
   );

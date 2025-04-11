@@ -40,7 +40,7 @@ const addSeller = async ({ sellerName, sellerPhone }, setSellers) => {
             setSellers((sellers) => [...sellers, { id: json.id, name: sellerName, phone: sellerPhone }]);
         } else {
             const err = await response.json();
-            console.error("failed to add seller: ", err.message);
+            console.error("failed to fetch: ", err.message);
         }
     } catch (err) {
         console.error("Couldn't add seller: ", err);
@@ -66,7 +66,7 @@ const updateSeller = async ({ sellerName, sellerPhone }, sellerId, setSellers) =
             );
         } else {
             const err = await response.json();
-            console.error("failed to update seller: ", err.message);
+            console.error("failed to fetch: ", err.message);
         }
     } catch (err) {
         console.error("Couldn't update seller: ", err);
@@ -84,7 +84,7 @@ const deleteSeller = async (sellerId, setSellers) => {
             );
         } else {
             const err = await response.json();
-            console.error("failed to delete seller: ", err.message);
+            console.error("failed to fetch: ", err.message);
         }
     } catch (err) {
         console.error("Couldn't delete seller: ", err);
@@ -102,10 +102,10 @@ const addNewProduct = async ({ category, price }, sellerId) => {
         });
         if (!response.ok) {
             const err = await response.json();
-            console.error("failed to add seller: ", err.message);
+            console.error("failed to fetch: ", err.message);
         }
     } catch (err) {
-        console.error("Couldn't add seller: ", err);
+        console.error("Couldn't add product: ", err);
     }
 };
 
