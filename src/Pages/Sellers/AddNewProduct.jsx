@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import sellersApi from "../../API/sellers";
 
 const AddNewProduct = () => {
@@ -7,6 +7,7 @@ const AddNewProduct = () => {
     const { sellerId } = useParams();
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState('');
+    const navigate = useNavigate();
 
     return (
         <>
@@ -17,6 +18,7 @@ const AddNewProduct = () => {
                     sellersApi.addNewProduct({ category, price }, sellerId);
                     setCategory('');
                     setPrice('');
+                    navigate(-1);
                 }
             }>
                 <label>Category

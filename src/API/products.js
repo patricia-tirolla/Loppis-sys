@@ -31,25 +31,18 @@ const getSpecificProduct = async (productId) => {
 
 const updateProduct = async ({ category, price }, productId, setProducts) => {
     try {
-        const response = await fetch(`http://localhost:3001/sellers/${productId}`, {
+        const response = await fetch(`http://localhost:3001/products/${productId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ category, price })
         });
-        if (response.ok) {
-            setProducts((products) =>
-                products.map((product) =>
-                    product.id === productId
-                        ? { ...product, category, price }
-                        : product
-                )
-            );
-        } else {
+        if (!response.ok) {
             const err = await response.json();
             console.error("failed to update seller: ", err.message);
         }
+        
     } catch (err) {
         console.error("Couldn't update seller: ", err);
     }

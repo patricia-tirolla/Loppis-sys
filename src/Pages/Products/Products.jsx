@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
 import productsApi from '../../API/products';
 
 const Products = ({ inicialProducts }) => {
@@ -17,11 +16,45 @@ const Products = ({ inicialProducts }) => {
         <>
             <h2>These are the products</h2>
             <ul>
-                {products.map((product) => (
+                {products.map((product, index) => (
                     <li key={product.id}>
-                        <Link to={`/products/${product.id}`}>
-                            {product.category}
-                        </Link>
+                        {/* <Link to={`/products/${product.id}`}> */}
+                        <p>{product.id}</p>
+                            <form onSubmit={(e) => {
+                                e.preventDefault();
+                                productsApi.updateProduct({ category: product.category, price: product.price }, product.id, setProducts)
+                            }}>
+                            <label>
+                                <input 
+                                type="text" 
+                                value={product.category}
+                                onChange={(e) => {const updatedProducts = [...products];
+                                    updatedProducts[index] = {
+                                      ...updatedProducts[index],
+                                      category: e.target.value
+                                    };
+                                    setProducts(updatedProducts);
+                                }}
+                                />
+                            </label>
+                            <label>
+                                <input 
+                                type="text" 
+                                value={product.price}
+                                onChange={(e) => {const updatedProducts = [...products];
+                                    updatedProducts[index] = {
+                                      ...updatedProducts[index],
+                                      price: Number(e.target.value)
+                                    };
+                                    setProducts(updatedProducts);
+                                }}
+                                />
+                            </label>
+                            <button type="submit">Update</button>
+                            </form>
+{/*                             Fix delete button
+                            <button>Delete</button> */}
+                        {/* </Link> */}
                     </li>
                 ))}
             </ul>
