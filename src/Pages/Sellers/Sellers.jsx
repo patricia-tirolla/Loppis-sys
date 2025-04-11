@@ -15,7 +15,7 @@ const Sellers = () => {
     return (
         <>
             <h2>These are the sellers</h2>
-            <SellerActionPopup 
+            <SellerActionPopup
                 mode="add"
                 triggerText="Add Seller"
                 seller={seller}
@@ -44,7 +44,8 @@ const Sellers = () => {
                 {sellers.map((seller) => (
                     <li key={seller.id}>
                         <Link to={`/sellers/${seller.id}`}>
-                            {seller.name}
+                            <p>{seller.id}</p>
+                            <p>{seller.name}</p>
                         </Link>
                     </li>
                 ))}
