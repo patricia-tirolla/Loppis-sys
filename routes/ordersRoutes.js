@@ -56,7 +56,7 @@ router.get('/:orderId/orderItems', (req, res) => {
     }
 
     const orderItems = ordersRepo.getAllOrderItemsFromSpecificOrder(orderId);
-    res.send(orderItems);
+    res.json(orderItems);
 })
 
 export default router;
