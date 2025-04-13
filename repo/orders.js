@@ -1,3 +1,4 @@
+import res from "express/lib/response.js";
 import connectToDatabase from "./createDatabase.js";
 
 const getAllOrders = () => {
@@ -86,10 +87,37 @@ const getAllOrderItemsFromSpecificOrder = (orderId) => {
     } catch (err) {
         console.error("Error getting products: ", err);
         return null;
-    
-      } finally {
+
+    } finally {
+        db.close();
+    }
+};
+
+const sumAllOrderItems = (orderId) => {
+    const db = connectToDatabase();
+
+    try {
+        const statement = db.prepare(`
+            SELECT 
+	        orders.id AS order_id,
+	        SUM(products.price) AS total_price, 
+            COUNT(1) AS number_of_items
+            FROM orders
+            INNER JOIN order_items ON orders.id = order_items.order_id
+            INNER JOIN products ON products.id = order_items.product_id
+            WHERE orders.id = ?
+            `);
+
+        const result = statement.get(orderId);
+        return result;
+
+    } catch (err) {
+        console.error("Error getting sum: ", err);
+    return null;
+
+    } finally {
         db.close();
       }
 };
 
-export default { getAllOrders, getSpecificOrder, addOrder, getAllOrderItemsFromSpecificOrder }
+export default { getAllOrders, getSpecificOrder, addOrder, getAllOrderItemsFromSpecificOrder, sumAllOrderItems }

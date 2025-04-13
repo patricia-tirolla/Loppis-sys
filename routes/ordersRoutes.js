@@ -57,6 +57,18 @@ router.get('/:orderId/orderItems', (req, res) => {
 
     const orderItems = ordersRepo.getAllOrderItemsFromSpecificOrder(orderId);
     res.json(orderItems);
+});
+
+router.get('/:orderId/summary', (req, res) => {
+    const orderId = req.params.orderId;
+
+    const order = ordersRepo.getSpecificOrder(orderId);
+    if (!order) {
+        return res.status(404).send({ message: "Order not found." });
+    }
+
+    const sum = ordersRepo.sumAllOrderItems(orderId);
+    res.json(sum);
 })
 
 export default router;
