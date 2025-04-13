@@ -20,8 +20,7 @@ const Orders = () => {
         if (createdOrderId) {
             navigate(`/orders/${createdOrderId}/orderItems`);
         }
-
-    }
+    };
 
     return (
         <>

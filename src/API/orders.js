@@ -32,7 +32,7 @@ const addOrder = async () => {
 
 const addOrderItem = async (orderId, productId) => {
     try {
-        const response = await fetch(`http://localhost:3001/orders/${orderId}/products/${productId}`, {
+        const response = await fetch(`http://localhost:3001/orders/${orderId}/orderItems/${productId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -50,6 +50,20 @@ const addOrderItem = async (orderId, productId) => {
     }
 };
 
-const ordersAPI = { getAllOrders, addOrder, addOrderItem }
+const getAllOrderItemsFromSpecificOrder = async (orderId) => {
+    try {
+        const response = await fetch(`http://localhost:3001/orders/${orderId}/orderItems`);
+        if (response.ok) {
+            const json = await response.json();
+            return json;
+        } else {
+            console.error("failed to fetch order items", response.status);
+        }
+    } catch (err) {
+        console.error("Couldn't get order items: ", err);
+    }
+};
+
+const ordersAPI = { getAllOrders, addOrder, addOrderItem, getAllOrderItemsFromSpecificOrder }
 
 export default ordersAPI
