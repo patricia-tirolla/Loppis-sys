@@ -54,7 +54,7 @@ const Products = ({ inicialProducts }) => {
                             <button type="submit">Update</button>
                             </form>
                             {product.category}
-                            {product.price}
+                            {product.price}:-
 {/*                             Fix delete button
                             <button>Delete</button> */}
                         {/* </Link> */}

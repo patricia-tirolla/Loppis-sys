@@ -77,6 +77,20 @@ const getAllOrderItemsFromSpecificOrder = async (orderId) => {
     }
 };
 
-const ordersAPI = { getAllOrders, addOrder, addOrderItem, getAllOrderItemsFromSpecificOrder, getSpecificOrder }
+const sumOrder = async (orderId) => {
+    try {
+        const response = await fetch(`http://localhost:3001/orders/${orderId}/summary`);
+        if (response.ok) {
+            const json = await response.json();
+            return json;
+        } else {
+            console.error("failed to fetch sum", response.status);
+        }
+    } catch (err) {
+        console.error("Couldn't sum order: ", err);
+    }
+};
+
+const ordersAPI = { getAllOrders, addOrder, addOrderItem, getAllOrderItemsFromSpecificOrder, getSpecificOrder, sumOrder }
 
 export default ordersAPI

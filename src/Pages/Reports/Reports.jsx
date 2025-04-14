@@ -20,7 +20,7 @@ const Reports = () => {
                     <li>
                         <p>{seller.seller_id}</p>
                         <p>{seller.name}</p>
-                        <p>{seller.total}</p>
+                        <p>{seller.total}:-</p>
                     </li>
                 ))}
             </ul>

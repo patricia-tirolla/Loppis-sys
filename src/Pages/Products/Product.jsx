@@ -18,7 +18,7 @@ const Product = () => {
         <>
             <h2>This is the product with id: {productId}</h2>
             <h3>{product.category}</h3>
-            <p>{product.price}</p>
+            <p>{product.price}:-</p>
         </>
     ) : (
         <p>Product not found</p>

@@ -12,7 +12,7 @@ const Orders = () => {
             const fetchedOrders = await ordersAPI.getAllOrders();
             setOrders(fetchedOrders);
         }
-        fetchOrders()
+        fetchOrders();
     }, [])
 
     const addOrder = async () => {

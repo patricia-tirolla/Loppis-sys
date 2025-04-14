@@ -8,13 +8,16 @@ const OrderItems = () => {
     const [orderItems, setOrderItems] = useState([]);
     const { orderId } = useParams();
     const [productId, setProductId] = useState('');
+    const totalPrice = orderItems.reduce((sum, item) => sum + item.price, 0);
+
 
     useEffect(() => {
         const fetchOrderItems = async () => {
             const fetchedOrderItems = await ordersAPI.getAllOrderItemsFromSpecificOrder(orderId);
             setOrderItems(fetchedOrderItems);
         };
-        fetchOrderItems()
+
+        fetchOrderItems();
         // Why is React asking to include orderItems in the dependency array?
     }, [orderId])
     
@@ -59,10 +62,11 @@ const OrderItems = () => {
                             <h3>{item.order_item_id}</h3>
                             <p>{item.product_id}</p>
                             <p>{item.category}</p>
-                            <p>{item.price}</p>
+                            <p>{item.price}:-</p>
                         </li>
                     ))}
             </ul>
+            <h3>Total Price: {totalPrice.toFixed(2)}:-</h3>
         </>
     )
 };
