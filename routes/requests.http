@@ -71,6 +71,7 @@ GET http://localhost:3001/orders/2/orderItems
 ###
 
 GET http://localhost:3001/orders/2/summary
+###
 
 # ---------------- ORDER ITEMS
 GET http://localhost:3001/orderItems
@@ -79,7 +80,11 @@ GET http://localhost:3001/orderItems
 GET http://localhost:3001/orderItems/2
 ###
 
-POST http://localhost:3001/orders/1/orderItem/3
+POST http://localhost:3001/orders/1/orderItem/28
 ###
 
 DELETE http://localhost:3001/orderItems/3
+###
+
+# ---------------- REPORTS
+GET http://localhost:3001/reports/totalBySeller
