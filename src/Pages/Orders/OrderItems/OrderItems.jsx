@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Popup from "reactjs-popup";
 import ordersAPI from "../../../API/orders";
+import orderItemsAPI from "../../../API/orderItems";
 
 const OrderItems = () => {
     const [orderItems, setOrderItems] = useState([]);
@@ -10,14 +11,17 @@ const OrderItems = () => {
 
     useEffect(() => {
         const fetchOrderItems = async () => {
-            const fetchedOrderItems = await ordersAPI.getAllOrderItemsFromSpecificOrder(orderId)
+            const fetchedOrderItems = await ordersAPI.getAllOrderItemsFromSpecificOrder(orderId);
             setOrderItems(fetchedOrderItems);
         };
         fetchOrderItems()
-    }, [orderId, orderItems])
+        // Why is React asking to include orderItems in the dependency array?
+    }, [orderId])
     
     const addOrderItem = async (orderId, productId) => {
-        const createdOrderItem = await ordersAPI.addOrderItem(orderId, productId);
+        const createdItemId = await ordersAPI.addOrderItem(orderId, productId);
+
+        const createdOrderItem = await orderItemsAPI.getSpecificOrderItem(createdItemId.id);
 
         if (createdOrderItem) {
             setOrderItems((prevOrderItems) => [
