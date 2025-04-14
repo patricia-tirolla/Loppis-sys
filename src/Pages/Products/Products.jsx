@@ -25,8 +25,9 @@ const Products = ({ inicialProducts }) => {
                                 productsApi.updateProduct({ category: product.category, price: product.price }, product.id, setProducts)
                             }}>
                             
-                            <label>
+                            <label htmlFor="category">Category:
                                 <input 
+                                id="category"
                                 type="text" 
                                 value={product.category}
                                 onChange={(e) => {const updatedProducts = [...products];
@@ -38,8 +39,9 @@ const Products = ({ inicialProducts }) => {
                                 }}
                                 />
                             </label>
-                            <label>
+                            <label htmlFor="price">Price:
                                 <input 
+                                id="price"
                                 type="text" 
                                 value={product.price}
                                 onChange={(e) => {const updatedProducts = [...products];

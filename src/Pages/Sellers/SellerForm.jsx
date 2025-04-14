@@ -19,8 +19,9 @@ const SellerForm = ({
 
         <form onSubmit={onSubmit}>
             {(mode === 'update' || mode === 'delete') && (
-                <label>Seller Id
+                <label htmlFor="sellerId">Seller Id
                     <input
+                        id="sellerId"
                         type="number"
                         value={sellerId}
                         onChange={(e) => setSellerId(Number(e.target.value))}
@@ -30,16 +31,18 @@ const SellerForm = ({
 
             {mode !== 'delete' && (
                 <>
-                    <label>Name
+                    <label htmlFor="name">Name
                         <input
+                            id="name"
                             type="text"
                             name="name"
                             value={seller.sellerName}
                             onChange={(e) => setSeller({ ...seller, sellerName: e.target.value })}
                         />
                     </label>
-                    <label>Phone
+                    <label htmlFor="phone">Phone
                         <input
+                            id="phone"
                             type="tel"
                             name="phone"
                             pattern="[0-9]{10}"

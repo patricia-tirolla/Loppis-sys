@@ -21,12 +21,19 @@ const AddNewProduct = () => {
                     navigate(-1);
                 }
             }>
-                <label>Category
-                    <input type="text" value={category} onChange={(e) => setCategory(e.target.value)}/>
+                <label htmlFor="category">Category
+                    <input 
+                    id="category" 
+                    type="text" 
+                    value={category} 
+                    onChange={(e) => setCategory(e.target.value)}/>
                 </label>
 
-                <label>Price
-                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
+                <label htmlFor="price">Price
+                    <input id="price" 
+                    type="number" 
+                    value={price} 
+                    onChange={(e) => setPrice(e.target.value)}/>
                 </label>
                 <button>Add</button>
             </form>

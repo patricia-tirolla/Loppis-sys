@@ -17,7 +17,7 @@ const Reports = () => {
             <h2>This is the report</h2>
             <ul>
                 {sellersReport.map((seller) => (
-                    <li>
+                    <li key={seller.seller_id}>
                         <p>{seller.seller_id}</p>
                         <p>{seller.name}</p>
                         <p>{seller.total}:-</p>

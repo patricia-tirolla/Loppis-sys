@@ -8,7 +8,11 @@ const OrderItems = () => {
     const [orderItems, setOrderItems] = useState([]);
     const { orderId } = useParams();
     const [productId, setProductId] = useState('');
-    const totalPrice = orderItems.reduce((sum, item) => sum + item.price, 0);
+
+    const totalPrice = orderItems.reduce((sum, item) => {
+        const price = Number(item.price);
+        return sum + (isNaN(price) ? 0 : price);
+    }, 0);
 
 
     useEffect(() => {
@@ -44,8 +48,9 @@ const OrderItems = () => {
                         addOrderItem(orderId, productId);
                         setProductId('');
                     }}>
-                        <label>Product Id
+                        <label htmlFor="productId">Product Id
                             <input 
+                            id="productId"
                             type="number"
                             value={productId}
                             onChange={(e) => setProductId(e.target.value)}
