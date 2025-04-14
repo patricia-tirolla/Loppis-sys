@@ -23,8 +23,15 @@ const getSpecificOrderItem = (orderItemId) => {
 
     try {
         const checkStatement = db.prepare(`
-            SELECT * FROM order_items
-            WHERE id = ?
+            SELECT 
+            order_items.id AS order_item_id,
+            order_items.order_id,
+            order_items.product_id,
+            products.category, 
+            products.price
+            FROM order_items
+            INNER JOIN products ON products.id = order_items.product_id
+            WHERE order_items.id = ?
             `);
         
         const existingOrderItem = checkStatement.get(orderItemId);

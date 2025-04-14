@@ -1,7 +1,6 @@
 import express from "express";
 import ordersRepo from "../repo/orders.js";
 import orderItemsRepo from "../repo/orderItems.js";
-import orders from "../repo/orders.js";
 
 const router = express.Router();
 
