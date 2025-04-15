@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router";
-import ordersAPI from "../../API/orders";
+import { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router';
+import ordersAPI from '../../API/orders';
+import './Orders.css';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
@@ -23,19 +24,35 @@ const Orders = () => {
     };
 
     return (
-        <>
-            <h2>This is the Orders page</h2>
-            <button onClick={addOrder}>Create new order</button>
-            <ul>
-                {orders.map((order) => (
-                    <li key={order.id}>
-                        <Link to={`/orders/${order.id}/orderItems`}>
-                            {order.id}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </>
+        <div className="orders-page">
+  <h2 className="page-title">Orders</h2>
+
+  <div className="action-buttons">
+    <button className="add-order-btn" onClick={addOrder}>
+      Create New Order
+    </button>
+  </div>
+
+  <table className="order-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      {orders.map((order) => (
+        <tr key={order.id} className="order-row">
+          <td>
+            <Link to={`/orders/${order.id}/orderItems`} className="order-link">
+              {order.id}
+            </Link>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
     )
 };
 

@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import Popup from "reactjs-popup";
 import ordersAPI from "../../../API/orders";
 import orderItemsAPI from "../../../API/orderItems";
+import './OrderItems.css';
 
 const OrderItems = () => {
     const [orderItems, setOrderItems] = useState([]);
@@ -24,7 +25,7 @@ const OrderItems = () => {
         fetchOrderItems();
         // Why is React asking to include orderItems in the dependency array?
     }, [orderId])
-    
+
     const addOrderItem = async (orderId, productId) => {
         const createdItemId = await ordersAPI.addOrderItem(orderId, productId);
 
@@ -39,40 +40,62 @@ const OrderItems = () => {
     }
 
     return (
-        <>
-            <h2>Thes are the order items</h2>
-            <Popup trigger={<button >Add New Item</button>} modal nested>
-                {close => (
-                    <form onSubmit={(e) => {
-                        e.preventDefault();
-                        addOrderItem(orderId, productId);
-                        setProductId('');
-                    }}>
-                        <label htmlFor="productId">Product Id
-                            <input 
-                            id="productId"
-                            type="number"
-                            value={productId}
-                            onChange={(e) => setProductId(e.target.value)}
-                            />
-                        </label>
-                    </form>
-                )}
-            </Popup>
-            
-            <ul>
-                {orderItems &&
-                    orderItems.map((item) => (
-                        <li key={item.order_item_id}>
-                            <h3>{item.order_item_id}</h3>
-                            <p>{item.product_id}</p>
-                            <p>{item.category}</p>
-                            <p>{item.price}:-</p>
-                        </li>
-                    ))}
-            </ul>
-            <h3>Total Price: {totalPrice.toFixed(2)}:-</h3>
-        </>
+        <div className="order-items-page">
+            <h2 className="page-title">These are the Order Items</h2>
+
+            <div className="action-buttons">
+                <Popup trigger={<button className="add-item-btn">Add New Item</button>} modal nested>
+                    {close => (
+                        <form
+                            className="add-item-form"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                addOrderItem(orderId, productId);
+                                setProductId('');
+                                close();
+                            }}
+                        >
+                            <label htmlFor="productId" className="form-label">
+                                Product ID:
+                                <input
+                                    id="productId"
+                                    type="number"
+                                    value={productId}
+                                    onChange={(e) => setProductId(e.target.value)}
+                                    className="form-input"
+                                />
+                            </label>
+                            <button type="submit" className="form-submit-btn">Add</button>
+                        </form>
+                    )}
+                </Popup>
+            </div>
+
+            <table className="order-item-table">
+                <thead>
+                    <tr>
+                        <th className="order-id">Order Item ID</th>
+                        <th className="product-id">Product ID</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {orderItems &&
+                        orderItems.map((item) => (
+                            <tr key={item.order_item_id} className="order-item-row">
+                                <td className="order-id">{item.order_item_id}</td>
+                                <td className="product-id">{item.product_id}</td>
+                                <td>{item.category}</td>
+                                <td>{item.price}:-</td>
+                            </tr>
+                        ))}
+                </tbody>
+            </table>
+
+            <h3 className="total-price">Total Price: {totalPrice.toFixed(2)}:-</h3>
+        </div>
+
     )
 };
 

@@ -8,7 +8,7 @@ import Sellers from './Components/Sellers/Sellers';
 import AddNewProduct from './Components/Sellers/Seller/AddNewProduct/AddNewProduct';
 import Products from './Components/Products/Products';
 import Seller from './Components/Sellers/Seller/Seller';
-import Product from './Components/Products/Product';
+import Product from './Components/Products/Product/Product';
 import Orders from './Components/Orders/Orders';
 import OrderItems from './Components/Orders/OrderItems/OrderItems';
 import Reports from './Components/Reports/Reports';
