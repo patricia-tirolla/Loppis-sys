@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import sellersApi from "../../API/sellers";
+import sellersApi from "../../../../API/sellers";
+import "./AddNewProduct.css"
 
 const AddNewProduct = () => {
 
@@ -10,9 +11,12 @@ const AddNewProduct = () => {
     const navigate = useNavigate();
 
     return (
-        <>
-            <h2>Let's add a new product</h2>
-            <form onSubmit={
+        <div className="add-product-page">
+            <h2 className="add-product-title">Let's add a new product</h2>
+
+            <form 
+            className="add-product-form"
+            onSubmit={
                 (e) => {
                     e.preventDefault();
                     sellersApi.addNewProduct({ category, price }, sellerId);
@@ -21,23 +25,25 @@ const AddNewProduct = () => {
                     navigate(-1);
                 }
             }>
-                <label htmlFor="category">Category
+                <label htmlFor="category" className="form-label">Category
                     <input 
                     id="category" 
                     type="text" 
+                    className="form-input"
                     value={category} 
                     onChange={(e) => setCategory(e.target.value)}/>
                 </label>
 
-                <label htmlFor="price">Price
+                <label htmlFor="price" className="form-label">Price
                     <input id="price" 
                     type="number" 
+                    className="form-input"
                     value={price} 
                     onChange={(e) => setPrice(e.target.value)}/>
                 </label>
-                <button>Add</button>
+                <button type="submit" className="submit-btn">Add</button>
             </form>
-        </>
+        </div>
 
     )
 };

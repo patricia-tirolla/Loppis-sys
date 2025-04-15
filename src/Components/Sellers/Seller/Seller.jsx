@@ -1,7 +1,8 @@
 import { useParams, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
-import sellersApi from '../../API/sellers';
-import Products from '../Products/Products';
+import sellersApi from '../../../API/sellers';
+import Products from '../../Products/Products';
+import "./Seller.css"
 
 const Seller = () => {
     const { sellerId } = useParams();
@@ -9,7 +10,7 @@ const Seller = () => {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
 
-    const addProductButton = () => { 
+    const addProductButton = () => {
         navigate(`/sellers/${sellerId}/products/add`);
     }
 
@@ -29,17 +30,22 @@ const Seller = () => {
     }, [sellerId])
 
     return seller ? (
-        <>
-            <h2>This is the seller</h2>
-            <h3>{seller.name}</h3>
-            <p>{seller.phone}</p>
-            <button onClick={addProductButton}>Add Product</button>
+        <div className="seller-page-container">
+            <div className="seller-info-card">
+                <h2 className="seller-title">Seller</h2>
+                <h3 className="seller-name">Name: {seller.name}</h3>
+                <p className="seller-phone">Phone: {seller.phone}</p>
+                <button className="seller-add-product-btn" onClick={addProductButton}>Add Product</button>
+            </div>
 
-            <h2>These are all this seller's products</h2>
-            <ul>
-                <Products inicialProducts={products}/>
-            </ul>
-        </>
+            <div className="seller-products-section">
+                <h2 className="products-title">{seller.name}'s products:</h2>
+                <ul className="products-list">
+                    <Products inicialProducts={products} />
+                </ul>
+            </div>
+
+        </div>
     ) : (
         <p>Seller not found</p>
     )

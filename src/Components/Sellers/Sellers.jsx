@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import sellersApi from '../../API/sellers';
-import SellerActionPopup from './SellerActionPopup';
+import SellerActionPopup from './SellerActionPopup/SellerActionPopup';
+import './Sellers.css';
 
 const Sellers = () => {
     const [sellers, setSellers] = useState([]);
@@ -13,44 +14,67 @@ const Sellers = () => {
     }, []);
 
     return (
-        <>
-            <h2>These are the sellers</h2>
-            <SellerActionPopup
-                mode="add"
-                triggerText="Add Seller"
-                seller={seller}
-                setSeller={setSeller}
-                onSubmit={() => sellersApi.addSeller(seller, setSellers)}
-            />
+        <div className="page">
+            <h2 className="page-title">Sellers</h2>
 
-            <SellerActionPopup
-                mode="update"
-                triggerText="Update Seller"
-                seller={seller}
-                setSeller={setSeller}
-                sellerId={sellerId}
-                setSellerId={setSellerId}
-                onSubmit={() => sellersApi.updateSeller(seller, sellerId, setSellers)}
-            />
+            <div className="action-buttons">
+                <SellerActionPopup
+                    mode="add"
+                    triggerText="Add Seller"
+                    seller={seller}
+                    setSeller={setSeller}
+                    onSubmit={() => sellersApi.addSeller(seller, setSellers)}
+                />
 
-            <SellerActionPopup
-                mode="delete"
-                triggerText="Delete Seller"
-                sellerId={sellerId}
-                setSellerId={setSellerId}
-                onSubmit={() => sellersApi.deleteSeller(sellerId, setSellers)}
-            />
-            <ul>
-                {sellers.map((seller) => (
-                    <li key={seller.id}>
-                        <Link to={`/sellers/${seller.id}`}>
-                            <p>{seller.id}</p>
-                            <p>{seller.name}</p>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </>
+                <SellerActionPopup
+                    mode="update"
+                    triggerText="Update Seller"
+                    seller={seller}
+                    setSeller={setSeller}
+                    sellerId={sellerId}
+                    setSellerId={setSellerId}
+                    onSubmit={() => sellersApi.updateSeller(seller, sellerId, setSellers)}
+                />
+
+                <SellerActionPopup
+                    mode="delete"
+                    triggerText="Delete Seller"
+                    sellerId={sellerId}
+                    setSellerId={setSellerId}
+                    onSubmit={() => sellersApi.deleteSeller(sellerId, setSellers)}
+                />
+            </div>
+            <table className="seller-table">
+                <thead>
+                    <tr>
+                        <th>Seller ID</th>
+                        <th>Seller Name</th>
+                        <th>Seller Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {sellers.map((seller) => (
+                        <tr key={seller.id} className="seller-row">
+                            <td>
+                                <Link to={`/sellers/${seller.id}`} className="seller-link">
+                                    {seller.id}
+                                </Link>
+                            </td>
+                            <td>
+                                <Link to={`/sellers/${seller.id}`} className="seller-link">
+                                    {seller.name}
+                                </Link>
+                            </td>
+                            <td>
+                                <Link to={`/sellers/${seller.id}`} className="seller-link">
+                                    {seller.phone}
+                                </Link>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     )
 };
 

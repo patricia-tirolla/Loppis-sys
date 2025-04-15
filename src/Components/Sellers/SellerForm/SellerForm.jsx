@@ -1,3 +1,5 @@
+import "./SellerForm.css"
+
 const SellerForm = ({
     onSubmit,
     mode,
