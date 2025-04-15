@@ -47,6 +47,25 @@ const updateProduct = async ({ category, price }, productId, setProducts) => {
     }
 };
 
-const productsApi = { updateProduct, getAllProducts, getSpecificProduct };
+const deleteProduct = async (productId, setProducts, products) => {
+    try {
+        const response = await fetch(`http://localhost:3001/products/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        if (!response.ok) {
+            const err = await response.json();
+            console.error("failed to fetch product: ", err.message);
+        } else {
+            setProducts(products.filter(product => product.id !== productId));
+        }
+    } catch (err) {
+        console.error("Couldn't delete product: ", err);
+    }
+};
+
+const productsApi = { updateProduct, getAllProducts, getSpecificProduct, deleteProduct };
 
 export default productsApi

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import sellersApi from '../../API/sellers';
 import SellerActionPopup from './SellerActionPopup/SellerActionPopup';
 import './Sellers.css';
@@ -8,6 +8,8 @@ const Sellers = () => {
     const [sellers, setSellers] = useState([]);
     const [seller, setSeller] = useState({ sellerName: '', sellerPhone: '' });
     const [sellerId, setSellerId] = useState('');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         sellersApi.getAllSellers(setSellers);
@@ -54,21 +56,19 @@ const Sellers = () => {
                 </thead>
                 <tbody>
                     {sellers.map((seller) => (
-                        <tr key={seller.id} className="seller-row">
+                        <tr key={seller.id}
+                            className="seller-row"
+                            onClick={() => navigate(`/sellers/${seller.id}`)}
+                            style={{ cursor: 'pointer' }}
+                        >
                             <td>
-                                <Link to={`/sellers/${seller.id}`} className="seller-link">
-                                    {seller.id}
-                                </Link>
+                                {seller.id}
                             </td>
                             <td>
-                                <Link to={`/sellers/${seller.id}`} className="seller-link">
-                                    {seller.name}
-                                </Link>
+                                {seller.name}
                             </td>
                             <td>
-                                <Link to={`/sellers/${seller.id}`} className="seller-link">
-                                    {seller.phone}
-                                </Link>
+                                {seller.phone}
                             </td>
                         </tr>
                     ))}

@@ -23,7 +23,6 @@ const OrderItems = () => {
         };
 
         fetchOrderItems();
-        // Why is React asking to include orderItems in the dependency array?
     }, [orderId])
 
     const addOrderItem = async (orderId, productId) => {
@@ -41,7 +40,7 @@ const OrderItems = () => {
 
     return (
         <div className="order-items-page">
-            <h2 className="page-title">These are the Order Items</h2>
+            <h2 className="page-title">Order id: {orderId}</h2>
 
             <div className="action-buttons">
                 <Popup trigger={<button className="add-item-btn">Add New Item</button>} modal nested>
