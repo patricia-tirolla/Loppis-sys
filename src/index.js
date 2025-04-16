@@ -13,13 +13,21 @@ import Orders from './Components/Orders/Orders';
 import OrderItems from './Components/Orders/OrderItems/OrderItems';
 import Reports from './Components/Reports/Reports';
 import Layout from './Components/Layout/Layout';
+import Login from './Components/Login/Login';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/auth" element={<Login />} />
+
+        <Route path="/" element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }>
           <Route index element={<App />} />
           <Route path="/sellers" element={<Sellers />} />
           <Route path="/sellers/:sellerId" element={<Seller />} />
