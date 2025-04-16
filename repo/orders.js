@@ -1,4 +1,3 @@
-import res from "express/lib/response.js";
 import connectToDatabase from "./createDatabase.js";
 
 const getAllOrders = () => {
@@ -93,7 +92,7 @@ const getAllOrderItemsFromSpecificOrder = (orderId) => {
     }
 };
 
-const sumAllOrderItems = (orderId) => {
+const orderSum = (orderId) => {
     const db = connectToDatabase();
 
     try {
@@ -120,4 +119,4 @@ const sumAllOrderItems = (orderId) => {
       }
 };
 
-export default { getAllOrders, getSpecificOrder, addOrder, getAllOrderItemsFromSpecificOrder, sumAllOrderItems }
+export default { getAllOrders, getSpecificOrder, addOrder, getAllOrderItemsFromSpecificOrder, orderSum }

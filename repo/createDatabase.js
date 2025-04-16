@@ -13,16 +13,16 @@ const connectToDatabase = () => {
 };
 
 const createTables = (newdb) => {
-    try {
-      newdb.exec(`
+  try {
+    newdb.exec(`
         CREATE TABLE IF NOT EXISTS sellers (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name TEXT NOT NULL,
           phone TEXT NOT NULL
         );
         `);
-  
-      newdb.exec(`
+
+    newdb.exec(`
         CREATE TABLE IF NOT EXISTS products (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           category TEXT NOT NULL, 
@@ -31,14 +31,14 @@ const createTables = (newdb) => {
           FOREIGN KEY (seller_id) REFERENCES sellers (id)
         );
       `);
-  
-      newdb.exec(`
+
+    newdb.exec(`
         CREATE TABLE IF NOT EXISTS orders (
           id INTEGER PRIMARY KEY AUTOINCREMENT
         );
       `);
-  
-      newdb.exec(`
+
+    newdb.exec(`
         CREATE TABLE IF NOT EXISTS order_items (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           product_id INT UNIQUE NOT NULL,
@@ -46,10 +46,17 @@ const createTables = (newdb) => {
           FOREIGN KEY (product_id) REFERENCES products (id),
           FOREIGN KEY (order_id) REFERENCES orders (id)
         );
+        `);
+
+    newdb.exec(`
+        CREATE TABLE IF NOT EXISTS authorized_passwords (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          hashed_password TEXT NOT NULL
+    )
         `)
-    } catch (err) {
-      console.error("Error creating tables:", err)
-    }
-  };
+  } catch (err) {
+    console.error("Error creating tables:", err)
+  }
+};
 
 export default connectToDatabase;

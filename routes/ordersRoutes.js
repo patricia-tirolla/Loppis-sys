@@ -66,7 +66,7 @@ router.get('/:orderId/summary', (req, res) => {
         return res.status(404).send({ message: "Order not found." });
     }
 
-    const sum = ordersRepo.sumAllOrderItems(orderId);
+    const sum = ordersRepo.orderSum(orderId)
     res.json(sum);
 })
 
