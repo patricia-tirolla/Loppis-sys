@@ -94,5 +94,9 @@ POST http://localhost:3001/auth
 Content-Type: application/json
 
 {
-    "password": ""
+    "password": "123"
 }
+###
+
+GET http://localhost:3001/auth/protected-data
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJpYXQiOjE3NDQ4MTMzNzEsImV4cCI6MTc0NDgxNjk3MX0.GqTM99bHWiMS5ZwMKy8tJEkiXgBce8o2tPlyjEYrA8A"
