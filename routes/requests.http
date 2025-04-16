@@ -88,3 +88,11 @@ DELETE http://localhost:3001/orderItems/3
 
 # ---------------- REPORTS
 GET http://localhost:3001/reports/totalBySeller
+###
+
+POST http://localhost:3001/auth
+Content-Type: application/json
+
+{
+    "password": ""
+}
