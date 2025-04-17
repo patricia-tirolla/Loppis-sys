@@ -9,7 +9,6 @@
   overflow: hidden;
 }
 
-/* HEADER */
 .app-header {
   grid-area: header;
   display: flex;
@@ -42,10 +41,9 @@
   border-radius: 50%;
 }
 
-/* SIDEBAR */
 .sidebar {
   grid-area: sidebar;
-  background-color: #f3f4f6; /* Tailwind gray-100 */
+  background-color: #f3f4f6;
   padding: 1rem;
   border-right: 1px solid #e5e7eb;
   display: flex;
@@ -61,7 +59,7 @@
 
 .sidebar nav a {
   text-decoration: none;
-  color: #374151; /* Tailwind gray-700 */
+  color: #374151;
   font-weight: 500;
   padding: 0.5rem;
   border-radius: 0.375rem;
@@ -86,14 +84,41 @@
 }
 
 .nav-link.active {
-  background-color: #d1fae5; /* green-100 */
-  color: #065f46; /* green-800 */
+  background-color: #d1fae5;
+  color: #065f46; 
   font-weight: 600;
 }
 
-
-/* MAIN */
 .main-content {
   grid-area: main;
-  padding: 2rem
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-areas:
+      "header"
+      "sidebar"
+      "main";
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px auto 1fr;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.5rem 1rem;
+    background-color: #f9fafb;
+  }
+
+  .sidebar nav {
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
 }
