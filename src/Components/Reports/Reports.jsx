@@ -27,7 +27,9 @@ const Reports = () => {
                 </thead>
                 <tbody>
                     {sellersReport.map((seller) => (
-                        <tr key={seller.seller_id} className="report-row">
+                        <tr 
+                        key={seller.seller_id}
+                        className="report-row">
                             <td className="report-id">{seller.seller_id}</td>
                             <td>{seller.name}</td>
                             <td>{Number(seller.total).toFixed(2)}:-</td>

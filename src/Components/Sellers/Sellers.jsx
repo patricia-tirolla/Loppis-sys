@@ -58,7 +58,14 @@ const Sellers = () => {
                     {sellers.map((seller) => (
                         <tr key={seller.id}
                             className="seller-row"
+                            tabIndex={0}
                             onClick={() => navigate(`/sellers/${seller.id}`)}
+                            onKeyDown={(e) => {
+                                if(e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    navigate(`/sellers/${seller.id}`)
+                                }
+                            }}
                             style={{ cursor: 'pointer' }}
                         >
                             <td>

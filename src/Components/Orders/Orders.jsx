@@ -44,7 +44,14 @@ const Orders = () => {
             <tr
               key={order.id}
               className="order-row"
+              tabIndex={0}
               onClick={() => navigate(`/orders/${order.id}/orderItems`)}
+              onKeyDown={(e) => {
+                if(e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    navigate(`/orders/${order.id}/orderItems`)
+                }
+            }}
               style={{ cursor: 'pointer' }}
             >
               <td>{order.id}</td>

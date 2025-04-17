@@ -72,6 +72,12 @@
   background-color: #f9f9f9;
 }
 
+.seller-row:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+  background-color: #f0f8ff;
+}
+
 .seller-link {
   color: #007bff;
   text-decoration: none;
