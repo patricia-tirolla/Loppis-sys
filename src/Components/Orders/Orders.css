@@ -38,6 +38,17 @@
     border-bottom: 1px solid #ddd;
   }
 
+  .table-caption {
+    caption-side: top;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    padding-left: 8px;
+    padding-bottom: 10px;
+    color: #333;
+  }
+
   .order-row {
     transition: background-color 0.2s ease;
     cursor: pointer;

@@ -34,7 +34,7 @@ const Orders = () => {
       </div>
 
       <table className="order-table">
-        <caption>List of orders</caption>
+        <caption className="table-caption">List of orders</caption>
         <thead>
           <tr>
             <th scope="col">Order ID</th>

@@ -42,8 +42,8 @@ const Products = ({ inicialProducts }) => {
     return (
         <div className="products-page">
             <h2 className="page-title">Products</h2>
-            <caption>List of products</caption>
             <table className="product-table">
+            <caption className="table-caption">List of products</caption>
                 <thead>
                     <tr>
                         <th scope="col">Product ID</th>

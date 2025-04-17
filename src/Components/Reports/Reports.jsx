@@ -18,7 +18,7 @@ const Reports = () => {
             <h2 className="page-title">Sales Report</h2>
 
             <table className="report-table">
-                <caption>Report of total sales by seller</caption>
+                <caption className="table-caption">Report of total sales by seller</caption>
                 <thead>
                     <tr>
                         <th scope="col" className="report-id">Seller ID</th>

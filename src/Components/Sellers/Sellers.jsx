@@ -47,7 +47,7 @@ const Sellers = () => {
                 />
             </div>
             <table className="seller-table">
-                <caption>List of all sellers</caption>
+                <caption className="table-caption">List of all sellers</caption>
                 <thead>
                     <tr>
                         <th scope="col">Seller ID</th>
