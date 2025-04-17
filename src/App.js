@@ -4,7 +4,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Welcome to Loppis-sys!</h1>
+      <h2>Welcome to Loppis-sys!</h2>
     </div>
   );
 }
