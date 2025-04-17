@@ -42,12 +42,13 @@ const Products = ({ inicialProducts }) => {
     return (
         <div className="products-page">
             <h2 className="page-title">Products</h2>
+            <caption>List of products</caption>
             <table className="product-table">
                 <thead>
                     <tr>
-                        <th>Product ID</th>
-                        <th>Category</th>
-                        <th>Price</th>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
                     </tr>
                 </thead>
                 <tbody>

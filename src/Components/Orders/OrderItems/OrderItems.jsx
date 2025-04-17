@@ -71,6 +71,7 @@ const OrderItems = () => {
             </div>
 
             <table className="order-item-table">
+                <caption>List of order items</caption>
                 <thead>
                     <tr>
                         <th className="order-id">Order Item ID</th>

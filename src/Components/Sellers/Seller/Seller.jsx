@@ -39,7 +39,7 @@ const Seller = () => {
             </div>
 
             <div className="seller-products-section">
-                <h2 className="products-title">{seller.name}'s products:</h2>
+                <h3 className="products-title">{seller.name}'s products:</h3>
                 <ul className="products-list">
                     <Products inicialProducts={products} />
                 </ul>

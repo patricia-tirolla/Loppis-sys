@@ -47,11 +47,12 @@ const Sellers = () => {
                 />
             </div>
             <table className="seller-table">
+                <caption>List of all sellers</caption>
                 <thead>
                     <tr>
-                        <th>Seller ID</th>
-                        <th>Seller Name</th>
-                        <th>Seller Phone</th>
+                        <th scope="col">Seller ID</th>
+                        <th scope="col">Seller Name</th>
+                        <th scope="col">Seller Phone</th>
                     </tr>
                 </thead>
                 <tbody>
