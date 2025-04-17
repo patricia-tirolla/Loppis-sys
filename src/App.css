@@ -13,6 +13,36 @@
   }
 }
 
+.home-guidance {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  color: #1f2937;
+}
+
+.home-guidance h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.home-guidance ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.home-guidance li {
+  margin-bottom: 0.75rem;
+}
+
+.home-guidance p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

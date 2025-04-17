@@ -59,7 +59,7 @@
   }
 
   .order-row:focus {
-    outline: 2px solid #007bff;
+    outline: 2px solid #6f42c1;
     outline-offset: 2px;
     background-color: #f0f8ff;
   }
@@ -71,6 +71,6 @@
   }
   
   .order-link:hover {
-    color: #007bff;
+    color: #6f42c1;
   }
   

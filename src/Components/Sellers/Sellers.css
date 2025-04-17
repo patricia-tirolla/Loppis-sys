@@ -22,7 +22,7 @@
 }
 
 .action-buttons button {
-  background-color: #007bff;
+  background-color: #6f42c1;
   color: white;
   padding: 0.6rem 1.2rem;
   border: none;
@@ -33,14 +33,14 @@
 }
 
 .action-buttons button:hover {
-  background-color: #0056b3;
+  background-color: #5a2a9b;
 }
 
 .seller-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   overflow: hidden;
   table-layout: auto;
@@ -73,13 +73,13 @@
 }
 
 .seller-row:focus {
-  outline: 2px solid #007bff;
+  outline: 2px solid #6f42c1;
   outline-offset: 2px;
   background-color: #f0f8ff;
 }
 
 .seller-link {
-  color: #007bff;
+  color: #6f42c1;
   text-decoration: none;
   font-weight: 500;
 }

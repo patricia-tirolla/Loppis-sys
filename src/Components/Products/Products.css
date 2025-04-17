@@ -40,18 +40,18 @@
 }
 
 .product-input:focus {
-  border-color: #007bff;
+  border-color: #6f42c1;
   outline: none;
 }
 
 .product-row span {
   cursor: pointer;
-  color: #007bff;
+  color: #6f42c1;
   text-decoration: underline;
 }
 
 .product-row span:hover {
-  color: #0056b3;
+  color: #5a2a9b;
 }
 
 .product-update-btn,
@@ -65,7 +65,7 @@
 }
 
 .product-update-btn {
-  background-color: #007bff;
+  background-color: #6f42c1;
   color: white;
 }
 

@@ -1,5 +1,5 @@
 .popup-button {
-    background-color: #007bff;
+    background-color: #6f42c1;
     color: white;
     padding: 0.6rem 1.2rem;
     border: none;
@@ -10,7 +10,7 @@
   }
   
   .popup-button:hover {
-    background-color: #0056b3;
+    background-color: #5a2a9b;
   }
   
   .popup-content {
