@@ -6,7 +6,11 @@ import authenticateToken from "../authentication/authenticateToken.js";
 
 const router = express.Router();
 
-const SECRET_KEY = process.env.JWT_SECRET || "your-secret-key"
+const SECRET_KEY = process.env.JWT_SECRET;
+if (SECRET_KEY === undefined) {
+    console.error("Set environment variable JWT_SECRET");
+    process.exit(1);
+}
 
 router.post('/', async (req, res) => {
     const { password } = req.body;
