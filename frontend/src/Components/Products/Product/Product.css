@@ -1,0 +1,35 @@
+.product-page {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  .product-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .product-category {
+    font-size: 1.25rem;
+    color: #444;
+    margin-bottom: 0.5rem;
+  }
+  
+  .product-price {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #6f42c1;
+  }
+  
+  .product-not-found {
+    color: #dc3545;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
