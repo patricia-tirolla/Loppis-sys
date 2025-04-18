@@ -1,6 +1,12 @@
 const getSellersTotalReport = async () => {
     try {
-        const response = await fetch(`http://localhost:3001/reports/totalBySeller`);
+        const token = localStorage.getItem('token');
+
+        const response = await fetch(`http://localhost:3001/reports/totalBySeller`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.ok) {
             const json = await response.json();
             return json;

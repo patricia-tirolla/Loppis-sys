@@ -1,15 +1,16 @@
 import express from "express";
 import orderItemsRepo from "../repo/orderItems.js";
+import authenticateToken from "../authentication/authenticateToken.js";
 
 const router = express.Router();
 
 // GET all order items
-router.get('/', (req, res) => {
+router.get('/', authenticateToken, (req, res) => {
     res.send(orderItemsRepo.getAllOrderItems());
 });
 
 // GET specific order item
-router.get('/:orderItemId', (req, res) => {
+router.get('/:orderItemId', authenticateToken, (req, res) => {
     const orderItemId = req.params.orderItemId;
     const orderItem = orderItemsRepo.getSpecificOrderItem(orderItemId);
 
@@ -20,7 +21,7 @@ router.get('/:orderItemId', (req, res) => {
 });
 
 // DELETE order item
-router.delete('/:orderItemId', (req, res) => {
+router.delete('/:orderItemId', authenticateToken, (req, res) => {
     const orderItemId = req.params.orderItemId;
 
     const orderItem = orderItemsRepo.getSpecificOrderItem(orderItemId);

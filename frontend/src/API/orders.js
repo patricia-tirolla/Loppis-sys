@@ -1,6 +1,12 @@
 const getAllOrders = async () => {
     try {
-        const response = await fetch('http://localhost:3001/orders');
+        const token = localStorage.getItem('token');
+
+        const response = await fetch('http://localhost:3001/orders', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.ok) {
             const json = await response.json();
             return json;
@@ -14,7 +20,13 @@ const getAllOrders = async () => {
 
 const getSpecificOrder = async (orderId) => {
     try {
-        const response = await fetch(`http://localhost:3001/orders/${orderId}`);
+        const token = localStorage.getItem('token');
+
+        const response = await fetch(`http://localhost:3001/orders/${orderId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.ok) {
             const json = await response.json();
             return json;
@@ -28,8 +40,13 @@ const getSpecificOrder = async (orderId) => {
 
 const addOrder = async () => {
     try {
+        const token = localStorage.getItem('token');
+
         const response = await fetch('http://localhost:3001/orders', {
-            method: 'POST'
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
         if (response.ok) {
             const json = await response.json();
@@ -45,10 +62,13 @@ const addOrder = async () => {
 
 const addOrderItem = async (orderId, productId) => {
     try {
+        const token = localStorage.getItem('token');
+
         const response = await fetch(`http://localhost:3001/orders/${orderId}/orderItems/${productId}`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
         });
         if (response.ok) {
@@ -65,7 +85,13 @@ const addOrderItem = async (orderId, productId) => {
 
 const getAllOrderItemsFromSpecificOrder = async (orderId) => {
     try {
-        const response = await fetch(`http://localhost:3001/orders/${orderId}/orderItems`);
+        const token = localStorage.getItem('token');
+
+        const response = await fetch(`http://localhost:3001/orders/${orderId}/orderItems`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.ok) {
             const json = await response.json();
             return json;
@@ -79,7 +105,13 @@ const getAllOrderItemsFromSpecificOrder = async (orderId) => {
 
 const sumOrder = async (orderId) => {
     try {
-        const response = await fetch(`http://localhost:3001/orders/${orderId}/summary`);
+        const token = localStorage.getItem('token');
+
+        const response = await fetch(`http://localhost:3001/orders/${orderId}/summary`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.ok) {
             const json = await response.json();
             return json;

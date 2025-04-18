@@ -11,7 +11,7 @@ router.get('/', authenticateToken, (req, res, next) => {
 });
 
 // GET specific seller
-router.get('/:sellerId', (req, res) => {
+router.get('/:sellerId', authenticateToken, (req, res) => {
   const sellerId = req.params.sellerId;
 
   const seller = sellersRepo.getSpecificSeller(sellerId);
@@ -24,7 +24,7 @@ router.get('/:sellerId', (req, res) => {
 });
 
 // ADD new seller
-router.post('/', (req, res) => {
+router.post('/', authenticateToken, (req, res) => {
   const { sellerName, sellerPhone } = req.body;
 
   const newSeller = sellersRepo.addSeller(sellerName, sellerPhone);
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
 });
 
 // DELETE seller
-router.delete('/:sellerId', (req, res) => {
+router.delete('/:sellerId', authenticateToken, (req, res) => {
   const sellerId = req.params.sellerId;
 
   const seller = sellersRepo.getSpecificSeller(sellerId);
@@ -48,7 +48,7 @@ router.delete('/:sellerId', (req, res) => {
 });
 
 // UPDATE seller
-router.patch('/:sellerId', (req, res) => {
+router.patch('/:sellerId', authenticateToken, (req, res) => {
   const sellerId = req.params.sellerId;
 
   const seller = sellersRepo.getSpecificSeller(sellerId);
@@ -69,7 +69,7 @@ router.patch('/:sellerId', (req, res) => {
 });
 
 // ADD new product
-router.post('/:sellerId/products', (req, res) => {
+router.post('/:sellerId/products', authenticateToken, (req, res) => {
   const sellerId = req.params.sellerId;
 
   const seller = sellersRepo.getSpecificSeller(sellerId);
@@ -84,7 +84,7 @@ router.post('/:sellerId/products', (req, res) => {
 });
 
 // GET all products from specific seller
-router.get('/:sellerId/products', (req, res) => {
+router.get('/:sellerId/products', authenticateToken, (req, res) => {
   const sellerId = req.params.sellerId;
 
   const seller = sellersRepo.getSpecificSeller(sellerId);

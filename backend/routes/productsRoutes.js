@@ -1,15 +1,17 @@
 import express from "express";
-import productsRepo from "../repo/products.js"
+import productsRepo from "../repo/products.js";
+import authenticateToken from "../authentication/authenticateToken.js";
+
 
 const router = express.Router();
 
 // GEL all products
-router.get('/', (req, res) => {
+router.get('/', authenticateToken, (req, res) => {
     res.send(productsRepo.getAllProducts());
 });
 
 // GET specific product
-router.get('/:productId', (req, res) => {
+router.get('/:productId', authenticateToken, (req, res) => {
     const productId = req.params.productId;
     const product = productsRepo.getSpecificProduct(productId);
 
@@ -20,7 +22,7 @@ router.get('/:productId', (req, res) => {
 });
 
 // DELETE product
-router.delete('/:productId', (req, res) => {
+router.delete('/:productId', authenticateToken, (req, res) => {
     const productId = req.params.productId;
 
     const product = productsRepo.getSpecificProduct(productId);
@@ -33,7 +35,7 @@ router.delete('/:productId', (req, res) => {
 });
 
 // UPDATE product
-router.patch('/:productId', (req, res) => {
+router.patch('/:productId', authenticateToken, (req, res) => {
     const productId = req.params.productId;
 
     const product = productsRepo.getSpecificProduct(productId);

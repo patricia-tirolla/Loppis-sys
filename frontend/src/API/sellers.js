@@ -1,6 +1,14 @@
+
+
 const getAllSellers = async (setSellers) => {
     try {
-        const response = await fetch('http://localhost:3001/sellers');
+        const token = localStorage.getItem('token');
+
+        const response = await fetch('http://localhost:3001/sellers', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.ok) {
             const json = await response.json();
             setSellers(json);
@@ -14,7 +22,13 @@ const getAllSellers = async (setSellers) => {
 
 const getSpecificSeller = async (sellerId) => {
     try {
-        const response = await fetch(`http://localhost:3001/sellers/${sellerId}`);
+        const token = localStorage.getItem('token');
+
+        const response = await fetch(`http://localhost:3001/sellers/${sellerId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.ok) {
             const json = await response.json();
             return json;
@@ -28,10 +42,13 @@ const getSpecificSeller = async (sellerId) => {
 
 const addSeller = async ({ sellerName, sellerPhone }, setSellers) => {
     try {
+        const token = localStorage.getItem('token');
+
         const response = await fetch('http://localhost:3001/sellers', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ sellerName, sellerPhone })
         });
@@ -49,10 +66,13 @@ const addSeller = async ({ sellerName, sellerPhone }, setSellers) => {
 
 const updateSeller = async ({ sellerName, sellerPhone }, sellerId, setSellers) => {
     try {
+        const token = localStorage.getItem('token');
+
         const response = await fetch(`http://localhost:3001/sellers/${sellerId}`, {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ name: sellerName, phone: sellerPhone })
         });
@@ -75,8 +95,13 @@ const updateSeller = async ({ sellerName, sellerPhone }, sellerId, setSellers) =
 
 const deleteSeller = async (sellerId, setSellers) => {
     try {
+        const token = localStorage.getItem('token');
+
         const response = await fetch(`http://localhost:3001/sellers/${sellerId}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
         if (response.ok) {
             setSellers((sellers) =>
@@ -93,10 +118,13 @@ const deleteSeller = async (sellerId, setSellers) => {
 
 const addNewProduct = async ({ category, price }, sellerId) => {
     try {
+        const token = localStorage.getItem('token');
+
         const response = await fetch(`http://localhost:3001/sellers/${sellerId}/products`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ category, price })
         });
@@ -111,7 +139,13 @@ const addNewProduct = async ({ category, price }, sellerId) => {
 
 const getAllProductsFromSpecificSeller = async (sellerId) => {
     try {
-        const response = await fetch(`http://localhost:3001/sellers/${sellerId}/products`);
+        const token = localStorage.getItem('token');
+
+        const response = await fetch(`http://localhost:3001/sellers/${sellerId}/products`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
         if (response.ok) {
             const json = await response.json();
             return json;

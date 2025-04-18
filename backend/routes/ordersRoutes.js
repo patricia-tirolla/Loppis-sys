@@ -1,16 +1,18 @@
 import express from "express";
 import ordersRepo from "../repo/orders.js";
 import orderItemsRepo from "../repo/orderItems.js";
+import authenticateToken from "../authentication/authenticateToken.js";
+
 
 const router = express.Router();
 
 // GET all orders
-router.get('/', (req, res) => {
+router.get('/', authenticateToken, (req, res) => {
     res.send(ordersRepo.getAllOrders());
 });
 
 // GET specific order
-router.get('/:orderId', (req, res) => {
+router.get('/:orderId', authenticateToken, (req, res) => {
     const orderId = req.params.orderId;
 
     const order = ordersRepo.getSpecificOrder(orderId);
@@ -22,7 +24,7 @@ router.get('/:orderId', (req, res) => {
 });
 
 // ADD new order
-router.post('/', (req, res) => {
+router.post('/', authenticateToken, (req, res) => {
     const newOrder = ordersRepo.addOrder();
 
     if (!newOrder) {
@@ -32,7 +34,7 @@ router.post('/', (req, res) => {
 });
 
 // ADD new order item
-router.post('/:orderId/orderItems/:productId', (req, res) => {
+router.post('/:orderId/orderItems/:productId', authenticateToken, (req, res) => {
     const orderId = req.params.orderId;
     const productId = req.params.productId;
 
@@ -46,7 +48,7 @@ router.post('/:orderId/orderItems/:productId', (req, res) => {
 });
 
 // GET all order items from specific order
-router.get('/:orderId/orderItems', (req, res) => {
+router.get('/:orderId/orderItems', authenticateToken, (req, res) => {
     const orderId = req.params.orderId;
 
     const order = ordersRepo.getSpecificOrder(orderId);
@@ -58,7 +60,7 @@ router.get('/:orderId/orderItems', (req, res) => {
     res.json(orderItems);
 });
 
-router.get('/:orderId/summary', (req, res) => {
+router.get('/:orderId/summary', authenticateToken, (req, res) => {
     const orderId = req.params.orderId;
 
     const order = ordersRepo.getSpecificOrder(orderId);

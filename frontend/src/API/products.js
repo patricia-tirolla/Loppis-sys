@@ -1,7 +1,13 @@
 
 const getAllProducts = async (setProducts) => {
     try {
-        const response = await fetch('http://localhost:3001/products');
+        const token = localStorage.getItem('token');
+
+        const response = await fetch('http://localhost:3001/products', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.ok) {
             const json = await response.json();
             setProducts(json);
@@ -15,7 +21,13 @@ const getAllProducts = async (setProducts) => {
 
 const getSpecificProduct = async (productId) => {
     try {
-        const response = await fetch(`http://localhost:3001/products/${productId}`);
+        const token = localStorage.getItem('token');
+
+        const response = await fetch(`http://localhost:3001/products/${productId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.ok) {
             const json = await response.json();
             return json;
@@ -29,12 +41,15 @@ const getSpecificProduct = async (productId) => {
     }
 }
 
-const updateProduct = async ({ category, price }, productId, setProducts) => {
+const updateProduct = async ({ category, price }, productId) => {
     try {
+        const token = localStorage.getItem('token');
+
         const response = await fetch(`http://localhost:3001/products/${productId}`, {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ category, price })
         });
@@ -49,10 +64,13 @@ const updateProduct = async ({ category, price }, productId, setProducts) => {
 
 const deleteProduct = async (productId, setProducts, products) => {
     try {
+        const token = localStorage.getItem('token');
+
         const response = await fetch(`http://localhost:3001/products/${productId}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
         });
         if (!response.ok) {
