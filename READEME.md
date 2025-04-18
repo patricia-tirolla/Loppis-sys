@@ -7,14 +7,18 @@ Its primary purpose is to offer an easy-to-use tool that’s both fast and secur
 The application is split into two parts: **backEnd** and **frontEnd**.  
 Before running the project, make sure you have **Node.js** installed on your machine.
 
-### 🛠️ BackEnd Setup
+### BackEnd Setup
 
 1. Navigate to the backend project folder.
 2. Run `npm install` to install all dependencies.
-3. Set a `JWT_SECRET` environment variable, then start the server with `npm start`.
-4. The API should be running on PORT 3001.
+3. Run the command `npm run create-password <password>` to create your password (replace `<password>` with your passphrase.).
+4. Set a `JWT_SECRET` environment variable, then start the server with `npm start`.
+> [!TIP] 
+> You can set `JWT_SECRET` and run the server in a single command.
+> Example: `JWT_SECRET=secret npm start`
+5. The API should be running on PORT 3001.
 
-### 💻 FrontEnd Setup
+### FrontEnd Setup
 
 1. Navigate to the frontend project folder.
 2. Run `npm install` to install all dependencies.
@@ -31,6 +35,7 @@ The frontend will connect to the backend automatically if both are running on th
 - Used semantic HTML to improve screen reader compatibility.  
 - Applied accessible font styling: increased base size, chose a dyslexia-friendly font family, and focused on readability.  
 - Ensured strong contrast between backgrounds and text or interactive elements.
+- Multiple paragraphs is helpful for users with cognitive disabilities or attention disorders like ADHD. Users with low vision or dyslexia also benefit from more white space on the page. It helps reduce visual fatigue. Some assistive tech even allows jumping by paragraph.
 
 > [!NOTE]
 > Lighthouse score is **100** for both **Accessibility** and **SEO**.
@@ -49,7 +54,7 @@ To protect users’ privacy, **IP anonymization** is enabled and no personally i
 
 - I am using **SQLite** locally on my machine, which means that if something happens to my computer, it could affect the functionality of the project.
 
-- The database structure cannot be changed while in production due to the way it is implemented. If any changes are needed, I would have to delete the entire database and create a new one.
+- The database structure has to be managed manually. I tried to use a migration tool (db-migrate), but it doesn't work with ESM modules. The documentation doesn't offer a support for ESM.
 
 - Initially, the application was available to anyone without authentication. To mitigate this, I implemented a **unique password**, which is stored in the database. Only users with this password can log in.  
   **Bcrypt** is used to hash the password so that only the hash is stored in the database. Additionally, a **JWT (JSON Web Token)** is generated upon login for secure sessions.
