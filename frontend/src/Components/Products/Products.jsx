@@ -63,6 +63,7 @@ const Products = ({ inicialProducts }) => {
                                         onChange={(e) => handleChange(e, index, 'category')}
                                         onBlur={(e) => handleSubmit(e, product.id)}
                                         className="product-input"
+                                        aria-label="product-id"
                                     />
                                 </form>
                             </td>
@@ -74,6 +75,7 @@ const Products = ({ inicialProducts }) => {
                                         onChange={(e) => handleChange(e, index, 'price')}
                                         onBlur={(e) => handleSubmit(e, product.id)}
                                         className="product-input"
+                                        aria-label="product-price"
                                     />
                                 </form>
                             </td>
