@@ -24,7 +24,7 @@ Before running the project, make sure you have **Node.js** installed on your mac
 2. Run `npm install` to install all dependencies.
 3. Start the application with `npm start`.
 4. The app should be running on PORT 3000.
-5. A password is needed to be able to login.
+5. The application login password created on [BackEnd Setup](#backend-setup) must be used to login on frontend.
 
 The frontend will connect to the backend automatically if both are running on their default ports.
 

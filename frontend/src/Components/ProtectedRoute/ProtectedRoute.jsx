@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                if (response.status === 401) {
+                if (response.status === 401 || response.status === 403) {
                     setAuthenticated(false);
                 } else {
                     setAuthenticated(true);
