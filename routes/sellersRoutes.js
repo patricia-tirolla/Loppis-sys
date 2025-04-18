@@ -1,11 +1,12 @@
 import express from "express";
 import sellersRepo from "../repo/sellers.js";
 import productsRepo from "../repo/products.js";
+import authenticateToken from "../authentication/authenticateToken.js";
 
 const router = express.Router();
 
 // GET all sellers 
-router.get('/', (req, res, next) => {
+router.get('/', authenticateToken, (req, res, next) => {
   res.send(sellersRepo.getAllSellers());
 });
 
