@@ -16,7 +16,7 @@ Before running the project, make sure you have **Node.js** installed on your mac
 > [!TIP] 
 > You can set `JWT_SECRET` and run the server in a single command.
 > Example: `JWT_SECRET=secret npm start`
-5. The API should be running on PORT 3001.
+5. The API should be running on PORT 3001. You can also check the api-docs at address `http://localhost:3001/api-docs/`
 
 ### FrontEnd Setup
 
