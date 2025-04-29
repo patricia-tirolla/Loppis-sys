@@ -78,7 +78,7 @@ const deleteSeller = (sellerId) => {
       DELETE FROM sellers
       WHERE id = ?
       `);
-
+    console.log("checkin ", sellerId)
     const result = deleteStatement.run(sellerId);
 
     console.log(`Seller with ID ${sellerId} deleted.`)

@@ -43,8 +43,8 @@ router.delete('/:sellerId', authenticateToken, (req, res) => {
     return res.status(404).send({ message: "Seller not found" });
   }
 
-  sellersRepo.deleteSeller(sellerId);
-  res.sendStatus(204);
+  const deleted = sellersRepo.deleteSeller(sellerId);
+  res.status(204).send(deleted);
 });
 
 // UPDATE seller
