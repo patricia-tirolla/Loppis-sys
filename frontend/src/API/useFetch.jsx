@@ -3,11 +3,10 @@ import { useState, useEffect } from "react";
 const useFetch = (url, method, body = null) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true);
             const token = localStorage.getItem('token');
 
             const headers = {
@@ -29,7 +28,7 @@ const useFetch = (url, method, body = null) => {
                     const json = await response.json();
                     setData(json);
                 } else {
-                    throw new Error('HTTP error! Status: ', response.status);
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
             } catch (err) {
                 setError(err.message || 'Unknown error')
