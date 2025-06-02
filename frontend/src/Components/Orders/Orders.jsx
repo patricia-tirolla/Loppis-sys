@@ -1,20 +1,11 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import useFetch from '../../API/useFetch';
 import ordersAPI from '../../API/orders';
 import './Orders.css';
 
 const Orders = () => {
-  const [orders, setOrders] = useState([]);
-
+  const { data: orders, error, loading} = useFetch('http://localhost:3001/orders', 'GET')
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchOrders = async () => {
-      const fetchedOrders = await ordersAPI.getAllOrders();
-      setOrders(fetchedOrders);
-    }
-    fetchOrders();
-  }, [])
 
   const addOrder = async () => {
     const createdOrderId = await ordersAPI.addOrder();
@@ -22,6 +13,9 @@ const Orders = () => {
       navigate(`/orders/${createdOrderId}/orderItems`);
     }
   };
+
+  if (loading) return <p>Loading orders...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="orders-page">
