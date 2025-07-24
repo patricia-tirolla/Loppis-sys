@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useFetch from '../../API/useFetch';
 import sellersApi from '../../API/sellers';
 import SellerActionPopup from './SellerActionPopup/SellerActionPopup';
 import './Sellers.css';
 
 const Sellers = () => {
-    const [sellers, setSellers] = useState([]);
+    const { data: sellers, setData: setSellers, error, loading } = useFetch('http://localhost:3001/sellers', 'GET')
     const [seller, setSeller] = useState({ sellerName: '', sellerPhone: '' });
     const [sellerId, setSellerId] = useState('');
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        sellersApi.getAllSellers(setSellers);
-    }, []);
+    if (loading) return <p>Loading orders...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <div className="page">
@@ -62,7 +62,7 @@ const Sellers = () => {
                             tabIndex={0}
                             onClick={() => navigate(`/sellers/${seller.id}`)}
                             onKeyDown={(e) => {
-                                if(e.key === 'Enter' || e.key === ' ') {
+                                if (e.key === 'Enter' || e.key === ' ') {
                                     e.preventDefault();
                                     navigate(`/sellers/${seller.id}`)
                                 }
