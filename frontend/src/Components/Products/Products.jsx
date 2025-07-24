@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import useFetch from '../../API/useFetch';
 import productsApi from '../../API/products';
 import './Products.css'
 
 const Products = ({ inicialProducts }) => {
-    const [products, setProducts] = useState([]);
+    const { data: products, setData: setProducts, error, loading } = useFetch('http://localhost:3001/products', 'GET');
 
     useEffect(() => {
         if (!inicialProducts) {
-            productsApi.getAllProducts(setProducts);
+            setProducts(products);
         } else {
             setProducts(inicialProducts);
         }
-    }, [inicialProducts])
+    }, [products, setProducts, inicialProducts])
 
     const handleChange = (e, index, field) => {
         const updatedProducts = [...products];
@@ -39,11 +40,14 @@ const Products = ({ inicialProducts }) => {
         productsApi.deleteProduct(productId, setProducts, products);
     };
 
+    if (loading) return <p>Loading orders...</p>;
+    if (error) return <p>Error: {error}</p>;
+
     return (
         <div className="products-page">
             <h2 className="page-title">Products</h2>
             <table className="product-table">
-            <caption className="table-caption">List of products</caption>
+                <caption className="table-caption">List of products</caption>
                 <thead>
                     <tr>
                         <th scope="col">Product ID</th>
