@@ -1,25 +1,3 @@
-
-
-const getAllSellers = async (setSellers) => {
-    try {
-        const token = localStorage.getItem('token');
-
-        const response = await fetch('http://localhost:3001/sellers', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        if (response.ok) {
-            const json = await response.json();
-            setSellers(json);
-        } else {
-            console.error("failed to fetch sellers", response.status);
-        }
-    } catch (err) {
-        console.error("Couldn't fetch: ", err);
-    }
-};
-
 const getSpecificSeller = async (sellerId) => {
     try {
         const token = localStorage.getItem('token');
@@ -157,6 +135,6 @@ const getAllProductsFromSpecificSeller = async (sellerId) => {
     }
 };
 
-const sellersApi = { getAllSellers, addSeller, updateSeller, deleteSeller, getSpecificSeller, addNewProduct, getAllProductsFromSpecificSeller }
+const sellersApi = { addSeller, updateSeller, deleteSeller, getSpecificSeller, addNewProduct, getAllProductsFromSpecificSeller }
 
 export default sellersApi 

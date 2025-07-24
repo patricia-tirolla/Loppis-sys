@@ -1,24 +1,3 @@
-
-const getAllProducts = async (setProducts) => {
-    try {
-        const token = localStorage.getItem('token');
-
-        const response = await fetch('http://localhost:3001/products', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        if (response.ok) {
-            const json = await response.json();
-            setProducts(json);
-        } else {
-            console.error("failed to fetch sellers", response.status);
-        }
-    } catch (err) {
-        console.error("Couldn't fetch: ", err);
-    }
-};
-
 const getSpecificProduct = async (productId) => {
     try {
         const token = localStorage.getItem('token');
@@ -84,6 +63,6 @@ const deleteProduct = async (productId, setProducts, products) => {
     }
 };
 
-const productsApi = { updateProduct, getAllProducts, getSpecificProduct, deleteProduct };
+const productsApi = { updateProduct, getSpecificProduct, deleteProduct };
 
 export default productsApi

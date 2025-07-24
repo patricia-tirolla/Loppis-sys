@@ -1,23 +1,3 @@
-const getAllOrders = async () => {
-    try {
-        const token = localStorage.getItem('token');
-
-        const response = await fetch('http://localhost:3001/orders', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        if (response.ok) {
-            const json = await response.json();
-            return json;
-        } else {
-            console.error("failed to fetch orders", response.status);
-        }
-    } catch (err) {
-        console.error("Couldn't fetch: ", err);
-    }
-};
-
 const getSpecificOrder = async (orderId) => {
     try {
         const token = localStorage.getItem('token');
@@ -123,6 +103,6 @@ const sumOrder = async (orderId) => {
     }
 };
 
-const ordersAPI = { getAllOrders, addOrder, addOrderItem, getAllOrderItemsFromSpecificOrder, getSpecificOrder, sumOrder }
+const ordersAPI = { addOrder, addOrderItem, getAllOrderItemsFromSpecificOrder, getSpecificOrder, sumOrder }
 
 export default ordersAPI
