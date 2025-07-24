@@ -1,29 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import Popup from "reactjs-popup";
+import useFetch from "../../../API/useFetch";
 import ordersAPI from "../../../API/orders";
 import orderItemsAPI from "../../../API/orderItems";
 import './OrderItems.css';
 
 const OrderItems = () => {
-    const [orderItems, setOrderItems] = useState([]);
     const { orderId } = useParams();
     const [productId, setProductId] = useState('');
+    const { data: orderItems, setData: setOrderItems, error, loading } = useFetch(`http://localhost:3001/orders/${orderId}/orderItems`, 'GET')
 
-    const totalPrice = orderItems.reduce((sum, item) => {
+    const totalPrice = (orderItems || []).reduce((sum, item) => {
         const price = Number(item.price);
         return sum + (isNaN(price) ? 0 : price);
     }, 0);
-
-
-    useEffect(() => {
-        const fetchOrderItems = async () => {
-            const fetchedOrderItems = await ordersAPI.getAllOrderItemsFromSpecificOrder(orderId);
-            setOrderItems(fetchedOrderItems);
-        };
-
-        fetchOrderItems();
-    }, [orderId])
 
     const addOrderItem = async (orderId, productId) => {
         const createdItemId = await ordersAPI.addOrderItem(orderId, productId);
@@ -37,6 +28,9 @@ const OrderItems = () => {
             ]);
         }
     }
+
+    if (loading) return <p>Loading orders...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <div className="order-items-page">
