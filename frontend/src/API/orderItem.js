@@ -18,6 +18,6 @@ const getSpecificOrderItem = async (orderItemId) => {
     }
 };
 
-const orderItemsAPI = { getSpecificOrderItem}
+const orderItemAPI = { getSpecificOrderItem}
 
-export default orderItemsAPI
+export default orderItemAPI

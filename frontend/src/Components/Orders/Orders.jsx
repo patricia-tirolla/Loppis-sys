@@ -10,7 +10,7 @@ const Orders = () => {
   const addOrder = async () => {
     const createdOrderId = await ordersAPI.addOrder();
     if (createdOrderId) {
-      navigate(`/orders/${createdOrderId}/orderItems`);
+      navigate(`/orders/${createdOrderId}`);
     }
   };
 
@@ -40,11 +40,11 @@ const Orders = () => {
               key={order.id}
               className="order-row"
               tabIndex={0}
-              onClick={() => navigate(`/orders/${order.id}/orderItems`)}
+              onClick={() => navigate(`/orders/${order.id}`)}
               onKeyDown={(e) => {
                 if(e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    navigate(`/orders/${order.id}/orderItems`)
+                    navigate(`/orders/${order.id}`)
                 }
             }}
               style={{ cursor: 'pointer' }}

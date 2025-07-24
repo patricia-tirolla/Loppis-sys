@@ -10,7 +10,7 @@ import Products from './Components/Products/Products';
 import Seller from './Components/Sellers/Seller/Seller';
 import Product from './Components/Products/Product/Product';
 import Orders from './Components/Orders/Orders';
-import OrderItems from './Components/Orders/OrderItems/OrderItems';
+import Order from './Components/Orders/Order/Order';
 import Reports from './Components/Reports/Reports';
 import Layout from './Components/Layout/Layout';
 import Login from './Components/Login/Login';
@@ -35,7 +35,7 @@ root.render(
           <Route path="/products" element={<Products />} />
           <Route path="/products/:productId" element={<Product />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/orders/:orderId/orderItems" element={<OrderItems />} />
+          <Route path="/orders/:orderId" element={<Order />} />
           <Route path="/reports" element={<Reports />} />
         </Route>
       </Routes>

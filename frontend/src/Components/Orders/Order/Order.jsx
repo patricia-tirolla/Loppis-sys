@@ -3,15 +3,15 @@ import { useParams } from "react-router";
 import Popup from "reactjs-popup";
 import useFetch from "../../../API/useFetch";
 import ordersAPI from "../../../API/orders";
-import orderItemsAPI from "../../../API/orderItems";
-import './OrderItems.css';
+import orderItemAPI from "../../../API/orderItem";
+import './Order.css';
 
-const OrderItems = () => {
+const Order = () => {
     const { orderId } = useParams();
     const [productId, setProductId] = useState('');
-    const { data: orderItems, setData: setOrderItems, error, loading } = useFetch(`http://localhost:3001/orders/${orderId}/orderItems`, 'GET')
+    const { data: order, setData: setOrder, error, loading } = useFetch(`http://localhost:3001/orders/${orderId}/orderItems`, 'GET')
 
-    const totalPrice = (orderItems || []).reduce((sum, item) => {
+    const totalPrice = (order || []).reduce((sum, item) => {
         const price = Number(item.price);
         return sum + (isNaN(price) ? 0 : price);
     }, 0);
@@ -19,11 +19,11 @@ const OrderItems = () => {
     const addOrderItem = async (orderId, productId) => {
         const createdItemId = await ordersAPI.addOrderItem(orderId, productId);
 
-        const createdOrderItem = await orderItemsAPI.getSpecificOrderItem(createdItemId.id);
+        const createdOrderItem = await orderItemAPI.getSpecificOrderItem(createdItemId.id);
 
         if (createdOrderItem) {
-            setOrderItems((prevOrderItems) => [
-                ...prevOrderItems,
+            setOrder((prevOrder) => [
+                ...prevOrder,
                 createdOrderItem
             ]);
         }
@@ -75,8 +75,8 @@ const OrderItems = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {orderItems &&
-                        orderItems.map((item) => (
+                    {order &&
+                        order.map((item) => (
                             <tr key={item.order_item_id} className="order-item-row">
                                 <td className="order-id">{item.order_item_id}</td>
                                 <td className="product-id">{item.product_id}</td>
@@ -93,4 +93,4 @@ const OrderItems = () => {
     )
 };
 
-export default OrderItems
+export default Order
