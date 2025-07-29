@@ -1,17 +1,11 @@
-import { useEffect, useState } from 'react';
-import reportsRepo from '../../API/reports';
+import useFetch from '../../API/useFetch';
 import './Reports.css';
 
 const Reports = () => {
-    const [sellersReport, setSellerslReport] = useState([]);
+    const { data: sellersReport, error, loading } = useFetch('http://localhost:3001/reports/totalBySeller', 'GET')
 
-    useEffect(() => {
-        const fetchTotalReports = async () => {
-            const fetchedTotalReports = await reportsRepo.getSellersTotalReport();
-            setSellerslReport(fetchedTotalReports);
-        }
-        fetchTotalReports();
-    }, [])
+    if (loading) return <p>Loading orders...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <div className="page">
@@ -28,9 +22,9 @@ const Reports = () => {
                 </thead>
                 <tbody>
                     {sellersReport.map((seller) => (
-                        <tr 
-                        key={seller.seller_id}
-                        className="report-row">
+                        <tr
+                            key={seller.seller_id}
+                            className="report-row">
                             <td className="report-id">{seller.seller_id}</td>
                             <td>{seller.name}</td>
                             <td>{Number(seller.total).toFixed(2)}:-</td>
